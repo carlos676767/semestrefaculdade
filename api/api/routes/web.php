@@ -1,11 +1,10 @@
 <?php
 
+use App\Http\Controllers\ControllerProducts;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-// Route::get('/', function () {
-//     return view('dashboard');
-// });
+
 
 Route::get('/', function () {
     return view('dashboard');
@@ -15,6 +14,9 @@ Route::get('/crud', function () {
     return view('crud');
 });
 
+
+Route::post('/product', [ControllerProducts::class, 'insertProducts']);
+Route::get('/product', [ControllerProducts::class, 'getProducts']);
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

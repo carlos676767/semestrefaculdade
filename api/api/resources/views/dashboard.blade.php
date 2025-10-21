@@ -23,6 +23,15 @@
         background-image: linear-gradient(#FF0A7F,#780EFF);
         animation: rotate 4s linear infinite;
     }
+
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-slideIn {
+      animation: slideIn 0.4s ease forwards;
+    }
     </style>
     <section id="section" name="header" class="bg-gradient-to-b px-3 sm:px-10 overflow-hidden from-[#F5F7FF] via-[#fffbee] to-[#E6EFFF] pt-6 h-full">
         <header class="flex items-center justify-between px-6 py-3 md:py-4 shadow-sm max-w-5xl rounded-full mx-auto w-full bg-white">
@@ -135,7 +144,9 @@
 
 
 
-
+            <div id="alerta" class="hidden fixed top-6 right-6 bg-white border border-gray-200 shadow-2xl rounded-2xl p-5 flex items-start gap-4 max-w-sm animate-slideIn">
+  
+  </div>
 
 
             <h1 class="mt-40 text-3xl font-semibold text-center mx-auto">Nossas Últimas Criações</h1>
@@ -179,44 +190,17 @@
 
 
     <div class="flex flex-col md:flex-row items-center gap-10">
-    <!-- Imagem do supermercado -->
-    <img class="max-w-2xl w-full rounded-lg" 
-         src="https://raw.githubusercontent.com/prebuiltui/prebuiltui/main/assets/features/card-image-1.png" 
-         alt="Supermercado">
+ 
 
-    <div class="space-y-10 px-4 md:px-0">
-        <!-- Carrinho de compras -->
-        <div class="flex items-center justify-center gap-6 max-w-md">
-            <div class="p-6 aspect-square bg-green-100 rounded-full flex items-center justify-center">
-                <i class="fa-solid fa-cart-shopping text-green-600 text-2xl"></i>
-            </div>
-            <div class="space-y-2">
-                <h3 class="text-base font-semibold text-slate-700">Compras Online</h3>
-                <p class="text-sm text-slate-600">Faça seu pedido e receba em casa com segurança e rapidez.</p>
-            </div>
-        </div>
+    <div class="space-y-10 px-4 md:px-0" >
+        
 
-        <!-- Carrinho com ofertas -->
-        <div class="flex items-center justify-center gap-6 max-w-md">
-            <div class="p-6 aspect-square bg-orange-100 rounded-full flex items-center justify-center">
-                <i class="fa-solid fa-tags text-orange-600 text-2xl"></i>
-            </div>
-            <div class="space-y-2">
-                <h3 class="text-base font-semibold text-slate-700">Promoções Imperdíveis</h3>
-                <p class="text-sm text-slate-600">Confira descontos e ofertas especiais em todos os setores do supermercado.</p>
-            </div>
-        </div>
+      
 
-        <!-- Produtos frescos -->
-        <div class="flex items-center justify-center gap-6 max-w-md">
-            <div class="p-6 aspect-square bg-yellow-100 rounded-full flex items-center justify-center">
-                <i class="fa-solid fa-lemon text-yellow-600 text-2xl"></i>
-            </div>
-            <div class="space-y-2">
-                <h3 class="text-base font-semibold text-slate-700">Produtos Frescos</h3>
-                <p class="text-sm text-slate-600">Frutas, verduras e alimentos fresquinhos selecionados diariamente.</p>
-            </div>
-        </div>
+
+
+
+
     </div>
 </div>
     
@@ -226,103 +210,12 @@
   <div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
     <h2 class="text-2xl font-bold tracking-tight text-gray-900">Clientes também compraram</h2>
 
-    <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+    <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8" id="show">
 
-      <!-- Produto 1 -->
-      <div class="group relative">
-        <img src="https://tailwindcss.com/plus-assets/img/ecommerce-images/product-page-01-related-product-01.jpg" 
-             alt="Basic Tee Black" 
-             class="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-80" />
-        <div class="mt-4 flex justify-between">
-          <div>
-            <h3 class="text-sm text-gray-700">
-              <a href="#"><span aria-hidden="true" class="absolute inset-0"></span>Basic Tee</a>
-            </h3>
-            <p class="mt-1 text-sm text-gray-500">Black</p>
-          </div>
-          <p class="text-sm font-medium text-gray-900">$35</p>
-        </div>
-        <div class="mt-2 flex justify-center">
-          <div class="rainbow relative z-0 overflow-hidden p-0.5 flex items-center justify-center rounded-full hover:scale-105 transition duration-300 active:scale-100 w-full">
-            <button class="w-full px-6 py-2 text-sm text-white rounded-full font-medium bg-gray-800 flex items-center justify-center gap-2 hover:bg-gray-900 transition">
-              <i class="fa-solid fa-cart-shopping"></i>
-              Adicionar ao carrinho
-            </button>
-          </div>
-        </div>
-      </div>
+     
 
-      <!-- Produto 2 -->
-      <div class="group relative">
-        <img src="https://tailwindcss.com/plus-assets/img/ecommerce-images/product-page-01-related-product-02.jpg" 
-             alt="Basic Tee Aspen White" 
-             class="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-80" />
-        <div class="mt-4 flex justify-between">
-          <div>
-            <h3 class="text-sm text-gray-700">
-              <a href="#"><span aria-hidden="true" class="absolute inset-0"></span>Basic Tee</a>
-            </h3>
-            <p class="mt-1 text-sm text-gray-500">Aspen White</p>
-          </div>
-          <p class="text-sm font-medium text-gray-900">$35</p>
-        </div>
-        <div class="mt-2 flex justify-center">
-          <div class="rainbow relative z-0 overflow-hidden p-0.5 flex items-center justify-center rounded-full hover:scale-105 transition duration-300 active:scale-100 w-full">
-            <button class="w-full px-6 py-2 text-sm text-white rounded-full font-medium bg-gray-800 flex items-center justify-center gap-2 hover:bg-gray-900 transition">
-              <i class="fa-solid fa-cart-shopping"></i>
-              Adicionar ao carrinho
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Produto 3 -->
-      <div class="group relative">
-        <img src="https://tailwindcss.com/plus-assets/img/ecommerce-images/product-page-01-related-product-03.jpg" 
-             alt="Basic Tee Charcoal" 
-             class="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-80" />
-        <div class="mt-4 flex justify-between">
-          <div>
-            <h3 class="text-sm text-gray-700">
-              <a href="#"><span aria-hidden="true" class="absolute inset-0"></span>Basic Tee</a>
-            </h3>
-            <p class="mt-1 text-sm text-gray-500">Charcoal</p>
-          </div>
-          <p class="text-sm font-medium text-gray-900">$35</p>
-        </div>
-        <div class="mt-2 flex justify-center">
-          <div class="rainbow relative z-0 overflow-hidden p-0.5 flex items-center justify-center rounded-full hover:scale-105 transition duration-300 active:scale-100 w-full">
-            <button class="w-full px-6 py-2 text-sm text-white rounded-full font-medium bg-gray-800 flex items-center justify-center gap-2 hover:bg-gray-900 transition">
-              <i class="fa-solid fa-cart-shopping"></i>
-              Adicionar ao carrinho
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Produto 4 -->
-      <div class="group relative">
-        <img src="https://tailwindcss.com/plus-assets/img/ecommerce-images/product-page-01-related-product-04.jpg" 
-             alt="Artwork Tee Iso Dots" 
-             class="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-80" />
-        <div class="mt-4 flex justify-between">
-          <div>
-            <h3 class="text-sm text-gray-700">
-              <a href="#"><span aria-hidden="true" class="absolute inset-0"></span>Artwork Tee</a>
-            </h3>
-            <p class="mt-1 text-sm text-gray-500">Iso Dots</p>
-          </div>
-          <p class="text-sm font-medium text-gray-900">$35</p>
-        </div>
-        <div class="mt-2 flex justify-center">
-          <div class="rainbow relative z-0 overflow-hidden p-0.5 flex items-center justify-center rounded-full hover:scale-105 transition duration-300 active:scale-100 w-full">
-            <button class="w-full px-6 py-2 text-sm text-white rounded-full font-medium bg-gray-800 flex items-center justify-center gap-2 hover:bg-gray-900 transition">
-              <i class="fa-solid fa-cart-shopping"></i>
-              Adicionar ao carrinho
-            </button>
-          </div>
-        </div>
-      </div>
+      
+  
 
     </div>
   </div>
@@ -342,119 +235,97 @@
     <div tabindex="0" class="absolute inset-0 pl-10 focus:outline-none sm:pl-16">
       <el-dialog-panel class="ml-auto block size-full max-w-md transform transition duration-500 ease-in-out data-closed:translate-x-full sm:duration-700">
         <div class="flex h-full flex-col overflow-y-auto bg-white shadow-xl">
+
+          <!-- Header -->
           <div class="flex-1 overflow-y-auto px-4 py-6 sm:px-6">
             <div class="flex items-start justify-between">
-              <h2 id="drawer-title" class="text-lg font-medium text-gray-900">Shopping cart</h2>
+              <h2 id="drawer-title" class="text-lg font-medium text-gray-900">Carrinho de Compras</h2>
               <div class="ml-3 flex h-7 items-center">
-                <button type="button" command="close" commandfor="drawer" class="relative -m-2 p-2 text-gray-400 hover:text-gray-500">
+                <button type="button" command="close" commandfor="drawer" class="relative -m-2 p-2 text-gray-700 hover:text-gray-900">
                   <span class="absolute -inset-0.5"></span>
-                  <span class="sr-only">Close panel</span>
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" data-slot="icon" aria-hidden="true" class="size-6">
+                  <span class="sr-only">Fechar painel</span>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" class="size-6">
                     <path d="M6 18 18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round" />
                   </svg>
                 </button>
               </div>
             </div>
 
+            <!-- Produtos -->
             <div class="mt-8">
               <div class="flow-root">
-                <ul role="list" class="-my-6 divide-y divide-gray-200">
-                  <li class="flex py-6">
-                    <div class="size-24 shrink-0 overflow-hidden rounded-md border border-gray-200">
-                      <img src="https://tailwindcss.com/plus-assets/img/ecommerce-images/shopping-cart-page-04-product-01.jpg" alt="Salmon orange fabric pouch with match zipper, gray zipper pull, and adjustable hip belt." class="size-full object-cover" />
-                    </div>
+                <ul role="list" class="-my-6 divide-y divide-gray-200" id="cart">
+                  
+                
 
-                    <div class="ml-4 flex flex-1 flex-col">
-                      <div>
-                        <div class="flex justify-between text-base font-medium text-gray-900">
-                          <h3>
-                            <a href="#">Throwback Hip Bag</a>
-                          </h3>
-                          <p class="ml-4">$90.00</p>
-                        </div>
-                        <p class="mt-1 text-sm text-gray-500">Salmon</p>
-                      </div>
-                      <div class="flex flex-1 items-end justify-between text-sm">
-                        <p class="text-gray-500">Qty 1</p>
-
-                        <div class="flex">
-                          <button type="button" class="font-medium text-indigo-600 hover:text-indigo-500">Remove</button>
-                        </div>
-                      </div>
-                    </div>
-                  </li>
-                  <li class="flex py-6">
-                    <div class="size-24 shrink-0 overflow-hidden rounded-md border border-gray-200">
-                      <img src="https://tailwindcss.com/plus-assets/img/ecommerce-images/shopping-cart-page-04-product-02.jpg" alt="Front of satchel with blue canvas body, black straps and handle, drawstring top, and front zipper pouch." class="size-full object-cover" />
-                    </div>
-
-                    <div class="ml-4 flex flex-1 flex-col">
-                      <div>
-                        <div class="flex justify-between text-base font-medium text-gray-900">
-                          <h3>
-                            <a href="#">Medium Stuff Satchel</a>
-                          </h3>
-                          <p class="ml-4">$32.00</p>
-                        </div>
-                        <p class="mt-1 text-sm text-gray-500">Blue</p>
-                      </div>
-                      <div class="flex flex-1 items-end justify-between text-sm">
-                        <p class="text-gray-500">Qty 1</p>
-
-                        <div class="flex">
-                          <button type="button" class="font-medium text-indigo-600 hover:text-indigo-500">Remove</button>
-                        </div>
-                      </div>
-                    </div>
-                  </li>
-                  <li class="flex py-6">
-                    <div class="size-24 shrink-0 overflow-hidden rounded-md border border-gray-200">
-                      <img src="https://tailwindcss.com/plus-assets/img/ecommerce-images/shopping-cart-page-04-product-03.jpg" alt="Front of zip tote bag with white canvas, black canvas straps and handle, and black zipper pulls." class="size-full object-cover" />
-                    </div>
-
-                    <div class="ml-4 flex flex-1 flex-col">
-                      <div>
-                        <div class="flex justify-between text-base font-medium text-gray-900">
-                          <h3>
-                            <a href="#">Zip Tote Basket</a>
-                          </h3>
-                          <p class="ml-4">$140.00</p>
-                        </div>
-                        <p class="mt-1 text-sm text-gray-500">White and black</p>
-                      </div>
-                      <div class="flex flex-1 items-end justify-between text-sm">
-                        <p class="text-gray-500">Qty 1</p>
-
-                        <div class="flex">
-                          <button type="button" class="font-medium text-indigo-600 hover:text-indigo-500">Remove</button>
-                        </div>
-                      </div>
-                    </div>
-                  </li>
+                    
                 </ul>
               </div>
             </div>
           </div>
 
+          <!-- Rodapé -->
           <div class="border-t border-gray-200 px-4 py-6 sm:px-6">
+            <!-- Campo CEP -->
+            <div class="mb-4">
+              <label for="cep" class="block text-sm font-medium text-gray-700">Informe seu CEP</label>
+              <input 
+                type="text" 
+                id="cep" 
+                name="cep" 
+                maxlength="9"
+                placeholder="00000-000"
+                class="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-indigo-600 focus:ring-indigo-600 sm:text-sm"
+              />
+            </div>
+
+            <!-- Método de Pagamento -->
+            <div class="mb-4">
+              <label for="payment" class="block text-sm font-medium text-gray-700">Método de Pagamento</label>
+              <select 
+                id="payment" 
+                name="payment"
+                class="mt-1 block w-full rounded-md border border-gray-300 bg-white shadow-sm focus:border-indigo-600 focus:ring-indigo-600 sm:text-sm"
+              >
+                <option value="pix">PIX</option>
+                <option value="card">Cartão de Crédito</option>
+                <option value="boleto">Boleto</option>
+              </select>
+            </div>
+
+            <!-- Totais -->
             <div class="flex justify-between text-base font-medium text-gray-900">
               <p>Subtotal</p>
-              <p>$262.00</p>
+              <p id="subtotalValue"></p>
             </div>
-            <p class="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
+            <div class="flex justify-between text-base font-medium text-gray-900 mt-2">
+              <p>Frete</p>
+              <p id="shippingValue">$–</p>
+            </div>
+            <div class="flex justify-between text-base font-medium text-gray-900 mt-2">
+              <p>Total</p>
+              <p id="totalValue">$–</p>
+            </div>
+            <p class="mt-0.5 text-sm text-gray-500">O frete será calculado ao informar o CEP.</p>
+
+            <!-- Botão Checkout -->
             <div class="mt-6">
-              <a href="#" class="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-xs hover:bg-indigo-700">Checkout</a>
+              <button id="checkoutBtn" class="flex items-center justify-center w-full rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-xs hover:bg-indigo-700">
+                Finalizar Compra
+              </button>
             </div>
+
+            <!-- Continuar comprando -->
             <div class="mt-6 flex justify-center text-center text-sm text-gray-500">
               <p>
-                or
+                ou
                 <button type="button" command="close" commandfor="drawer" class="font-medium text-indigo-600 hover:text-indigo-500">
-                  Continue Shopping
-                  <span aria-hidden="true"> &rarr;</span>
+                  Continuar comprando →
                 </button>
               </p>
             </div>
           </div>
+
         </div>
       </el-dialog-panel>
     </div>
@@ -536,6 +407,15 @@
 
 
 
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.3/css/all.min.css"
+  integrity="sha512-yh+YHzW2LJ2K8Xv6a1NydtjT6hI5+6J6ySgFGrZ7gK+ShyzTqFqD4X/9L+I0rHZGzZg3U9qYr5x7jTvBf1X0iw=="
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer"
+/>
+
+
 
 
 
@@ -548,6 +428,5 @@
     <script src="{{ asset('app.js') }}"></script>
 
    
-
 
 </x-app-layout>

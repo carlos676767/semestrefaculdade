@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,21 +8,27 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+
 
   <style>
     body {
       background: radial-gradient(circle at top left, #f8faff, #eef2ff);
       font-family: 'Inter', sans-serif;
     }
+
     .glass {
       backdrop-filter: blur(16px) saturate(180%);
       -webkit-backdrop-filter: blur(16px) saturate(180%);
       background-color: rgba(255, 255, 255, 0.6);
       border: 1px solid rgba(209, 213, 219, 0.3);
     }
+
     .transition-fast {
       transition: all 0.3s ease;
     }
+
     .sidebar-btn:hover {
       background-color: rgba(99, 102, 241, 0.1);
     }
@@ -37,13 +44,13 @@
         <i data-lucide="layout-dashboard" class="w-6 h-6"></i> Painel
       </h1>
       <nav class="space-y-3">
-        <button onclick="showSection('crud')" class="sidebar-btn w-full flex items-center gap-3 px-4 py-2 rounded-lg text-gray-700 transition-fast">
+        <button class="sidebar-btn w-full flex items-center gap-3 px-4 py-2 rounded-lg text-gray-700 transition-fast">
           <i data-lucide="database" class="w-5 h-5"></i> CRUD
         </button>
-        <button onclick="showSection('relatorios')" class="sidebar-btn w-full flex items-center gap-3 px-4 py-2 rounded-lg text-gray-700 transition-fast">
+        <button class="sidebar-btn w-full flex items-center gap-3 px-4 py-2 rounded-lg text-gray-700 transition-fast">
           <i data-lucide="bar-chart-3" class="w-5 h-5"></i> Relatórios
         </button>
-        <button onclick="showSection('pedidos')" class="sidebar-btn w-full flex items-center gap-3 px-4 py-2 rounded-lg text-gray-700 transition-fast">
+        <button class="sidebar-btn w-full flex items-center gap-3 px-4 py-2 rounded-lg text-gray-700 transition-fast">
           <i data-lucide="truck" class="w-5 h-5"></i> Pedidos
         </button>
       </nav>
@@ -89,67 +96,72 @@
 
     <!-- CRUD -->
     <section id="crud" class="space-y-8">
-  <div class="flex justify-between items-center">
-    <h3 class="text-2xl font-semibold text-gray-800 flex items-center gap-2">
-      <i data-lucide="database"></i> Gerenciar Produtos
-    </h3>
-  </div>
-
-  <!-- Formulário -->
-  <div class="glass p-6 rounded-2xl shadow-md border border-indigo-100/40">
-    <form id="productForm" class="grid grid-cols-1 sm:grid-cols-5 gap-4">
-      <div class="sm:col-span-2">
-        <input type="text" id="name" placeholder="Nome do Produto"
-          class="border p-2 rounded-lg w-full focus:ring-2 focus:ring-indigo-400 transition-fast outline-none"
-          required />
-      </div>
-
-      <div>
-        <input type="number" id="price" placeholder="Preço (R$)"
-          class="border p-2 rounded-lg w-full focus:ring-2 focus:ring-indigo-400 transition-fast outline-none"
-          required />
-      </div>
-
-      <div>
-        <input type="number" id="stock" placeholder="Estoque"
-          class="border p-2 rounded-lg w-full focus:ring-2 focus:ring-indigo-400 transition-fast outline-none"
-          required />
-      </div>
-      <div>
-        <input type="number" id="stock" placeholder="url imagem"
-          class="border p-2 rounded-lg w-full focus:ring-2 focus:ring-indigo-400 transition-fast outline-none"
-          required />
+      <div class="flex justify-between items-center">
+        <h3 class="text-2xl font-semibold text-gray-800 flex items-center gap-2">
+          <i data-lucide="database"></i> Gerenciar Produtos
+        </h3>
       </div>
 
 
-      <div class="sm:col-span-5">
-        <textarea id="description" placeholder="Descrição do Produto"
-          class="border p-2 rounded-lg w-full focus:ring-2 focus:ring-indigo-400 transition-fast outline-none resize-none" rows="2"></textarea>
+      <div class="glass p-6 rounded-2xl shadow-md border border-indigo-100/40">
+        <div id="productForm" class="grid grid-cols-1 sm:grid-cols-5 gap-4">
+          <!-- ID oculto (para editar produtos existentes) -->
+          <input type="hidden" id="id" />
+
+          <div class="sm:col-span-2">
+            <input type="text" id="name" placeholder="Nome do Produto"
+              class="border p-2 rounded-lg w-full focus:ring-2 focus:ring-indigo-400 transition-fast outline-none"
+              required />
+          </div>
+
+          <div>
+            <input type="number" id="price" placeholder="Preço (R$)"
+              class="border p-2 rounded-lg w-full focus:ring-2 focus:ring-indigo-400 transition-fast outline-none"
+              required />
+          </div>
+
+
+          <div>
+            <input
+              type="file"
+              id="imageUrl"
+              name="image"
+              accept="image/*"
+              class="border p-2 rounded-lg w-full focus:ring-2 focus:ring-indigo-400 transition-fast outline-none" />
+          </div>
+
+
+          <div class="sm:col-span-5">
+            <textarea id="description" placeholder="Descrição do Produto"
+              class="border p-2 rounded-lg w-full focus:ring-2 focus:ring-indigo-400 transition-fast outline-none resize-none"
+              rows="2"></textarea>
+          </div>
+
+          <button id="save"
+            class="bg-gradient-to-r from-indigo-600 to-indigo-500 text-white rounded-lg px-6 py-2 font-medium hover:from-indigo-500 hover:to-indigo-400 shadow-md transition-fast flex items-center justify-center gap-2">
+            <i data-lucide="plus-circle" class="w-5 h-5"></i> Salvar
+          </button>
+        </div>
+
       </div>
 
-      <button class="bg-gradient-to-r from-indigo-600 to-indigo-500 text-white rounded-lg px-6 py-2 font-medium hover:from-indigo-500 hover:to-indigo-400 shadow-md transition-fast flex items-center justify-center gap-2">
-        <i data-lucide="plus-circle" class="w-5 h-5"></i> Salvar
-      </button>
-    </form>
-  </div>
-
-  <!-- Tabela -->
-  <div class="glass p-6 rounded-2xl shadow-lg border border-indigo-100/40 overflow-hidden">
-    <table class="w-full text-left border-collapse">
-      <thead>
-        <tr class="text-gray-700 border-b">
-          <th class="p-3">Nome</th>
-          <th class="p-3">Preço</th>
-          <th class="p-3">Estoque</th>
-          <th class="p-3">Descrição</th>
-          <th class="p-3 text-right">Ações</th>
-          <th class="p-3 text-right">Url imagem</th>
-        </tr>
-      </thead>
-      <tbody id="productTable" class="text-gray-700"></tbody>
-    </table>
-  </div>
-</section>
+      <!-- Tabela -->
+      <div class="glass p-6 rounded-2xl shadow-lg border border-indigo-100/40 overflow-hidden">
+        <table class="w-full text-left border-collapse">
+          <thead>
+            <tr class="text-gray-700 border-b">
+              <th class="p-3">Nome</th>
+              <th class="p-3">Preço</th>
+              <th class="p-3">Estoque</th>
+              <th class="p-3">Descrição</th>
+              <th class="p-3 text-right">Ações</th>
+              <th class="p-3 text-right">Url imagem</th>
+            </tr>
+          </thead>
+          <tbody id="productTable" class="text-gray-700"></tbody>
+        </table>
+      </div>
+    </section>
 
     <!-- Relatórios -->
     <section id="relatorios" class="hidden">
@@ -169,9 +181,100 @@
   </main>
 
   <script>
-    lucide.createIcons();
+  lucide.createIcons();
 
-   
-  </script>
+  class ObjectValues {
+
+    static objectValues() {
+      const imagem = document.getElementById(`imageUrl`).files[0];
+      const name = document.getElementById(`name`).value.trim();
+      const price = document.getElementById(`price`).value.trim();
+      const description = document.getElementById(`description`).value.trim();
+
+      const values = { name, price, description };
+
+      return { values, imagem };
+    }
+
+    static dataForm() {
+      const { values, imagem } = ObjectValues.objectValues();
+
+      const form = new FormData();
+      form.append('data', JSON.stringify(values));
+      if (imagem) {
+        form.append('image', imagem);
+      }
+
+      return form;
+    }
+  }
+
+
+
+  class Alert {
+
+    static alert(icon,message){
+      Swal.fire({
+      icon: icon,
+      title: 'Atenção!',
+      text: message,
+      showConfirmButton: true
+    });
+    }
+  }
+  class HttpRequest extends ObjectValues {
+    static async request() {
+      try {
+        const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+        const response = await fetch('http://localhost:8000/product', {
+          method: 'POST',
+          body: ObjectValues.dataForm(),
+          headers: {
+            'X-CSRF-TOKEN': token
+          },
+        });
+
+        const result = await response.json();
+        console.log(result);
+
+
+        if (response.ok) {
+          return Alert.alert(`success`, `cadastro feito com sucesso`)
+        }
+      
+
+        const v = Object.values( result.erros|| result.mensagem).join(`\n`)
+      
+        
+        
+        return Alert.alert(`error`, v)
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+  
+  }
+
+  class BtnSend {
+    static send() {
+      const btn = document.getElementById('save');
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        HttpRequest.request();
+      });
+    }
+  }
+
+  BtnSend.send();
+
+
+
+
+ 
+</script>
+
 </body>
+
 </html>
