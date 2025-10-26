@@ -1,0 +1,137 @@
+{
+    "AC": {
+        "regiao": "Norte",
+        "preco_km": 3.0,
+        "piso_antt": 8.9
+    },
+    "AL": {
+        "regiao": "Nordeste",
+        "preco_km": 3.0,
+        "piso_antt": 8.7
+    },
+    "AM": {
+        "regiao": "Norte",
+        "preco_km": 3.0,
+        "piso_antt": 8.9
+    },
+    "AP": {
+        "regiao": "Norte",
+        "preco_km": 3.0,
+        "piso_antt": 8.9
+    },
+    "BA": {
+        "regiao": "Nordeste",
+        "preco_km": 3.0,
+        "piso_antt": 8.7
+    },
+    "CE": {
+        "regiao": "Nordeste",
+        "preco_km": 3.0,
+        "piso_antt": 8.7
+    },
+    "DF": {
+        "regiao": "Centro-Oeste",
+        "preco_km": 3.6,
+        "piso_antt": 9.1
+    },
+    "ES": {
+        "regiao": "Sudeste",
+        "preco_km": 4.2,
+        "piso_antt": 9.35
+    },
+    "GO": {
+        "regiao": "Centro-Oeste",
+        "preco_km": 3.6,
+        "piso_antt": 9.1
+    },
+    "MA": {
+        "regiao": "Nordeste",
+        "preco_km": 3.0,
+        "piso_antt": 8.7
+    },
+    "MG": {
+        "regiao": "Sudeste",
+        "preco_km": 4.2,
+        "piso_antt": 9.35
+    },
+    "MS": {
+        "regiao": "Centro-Oeste",
+        "preco_km": 3.6,
+        "piso_antt": 9.1
+    },
+    "MT": {
+        "regiao": "Centro-Oeste",
+        "preco_km": 3.6,
+        "piso_antt": 9.1
+    },
+    "PA": {
+        "regiao": "Norte",
+        "preco_km": 3.0,
+        "piso_antt": 8.9
+    },
+    "PB": {
+        "regiao": "Nordeste",
+        "preco_km": 3.0,
+        "piso_antt": 8.7
+    },
+    "PE": {
+        "regiao": "Nordeste",
+        "preco_km": 3.0,
+        "piso_antt": 8.7
+    },
+    "PI": {
+        "regiao": "Nordeste",
+        "preco_km": 3.0,
+        "piso_antt": 8.7
+    },
+    "PR": {
+        "regiao": "Sul",
+        "preco_km": 4.0,
+        "piso_antt": 9.2
+    },
+    "RJ": {
+        "regiao": "Sudeste",
+        "preco_km": 4.2,
+        "piso_antt": 9.35
+    },
+    "RN": {
+        "regiao": "Nordeste",
+        "preco_km": 3.0,
+        "piso_antt": 8.7
+    },
+    "RO": {
+        "regiao": "Norte",
+        "preco_km": 3.0,
+        "piso_antt": 8.9
+    },
+    "RR": {
+        "regiao": "Norte",
+        "preco_km": 3.0,
+        "piso_antt": 8.9
+    },
+    "RS": {
+        "regiao": "Sul",
+        "preco_km": 4.0,
+        "piso_antt": 9.2
+    },
+    "SC": {
+        "regiao": "Sul",
+        "preco_km": 4.0,
+        "piso_antt": 9.2
+    },
+    "SE": {
+        "regiao": "Nordeste",
+        "preco_km": 3.0,
+        "piso_antt": 8.7
+    },
+    "SP": {
+        "regiao": "Sudeste",
+        "preco_km": 4.2,
+        "piso_antt": 9.35
+    },
+    "TO": {
+        "regiao": "Norte",
+        "preco_km": 3.0,
+        "piso_antt": 8.9
+    }
+}

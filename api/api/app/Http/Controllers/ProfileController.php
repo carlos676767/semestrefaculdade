@@ -57,4 +57,12 @@ class ProfileController extends Controller
 
         return Redirect::to('/');
     }
+
+
+    public function getIduser()  {
+        $userId = Auth::id();
+        return response()->json([
+            'idUser' => $userId,
+        ], 200);
+    }
 }

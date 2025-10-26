@@ -1,6 +1,3 @@
-
-
-
 class Menu {
     static menu = document.getElementById("menu");
     static section = document.getElementById("section");
@@ -42,22 +39,17 @@ class DarkMode {
 
 DarkMode.darkMode();
 
-
-
 class LoadItens {
     static async load() {
-        const data = await fetch(`http://localhost:8000/product`)
-        const reseponse = await data.json()
+        const data = await fetch(`http://localhost:8000/product`);
+        const reseponse = await data.json();
 
-
-
-        const show = document.getElementById(`show`)
+        const show = document.getElementById(`show`);
 
         console.log(reseponse[0]);
 
-        reseponse.forEach(c => {
-            const { id, nome, imagem, descricao, preco } = c
-
+        reseponse.forEach((c) => {
+            const { id, nome, imagem, descricao, preco } = c;
 
             show.innerHTML += ` 
             <div class="group relative">
@@ -81,7 +73,13 @@ class LoadItens {
                 <div class="rainbow relative z-0 overflow-hidden p-0.5 flex items-center justify-center rounded-full hover:scale-105 transition duration-300 active:scale-100 w-full">
                   <button 
                     class="w-full px-6 py-2 text-sm text-white rounded-full font-medium bg-gray-800 flex items-center justify-center gap-2 hover:bg-gray-900 transition"
-                    data-produto='${JSON.stringify({ id, nome, imagem, descricao, preco })}'
+                    data-produto='${JSON.stringify({
+                        id,
+                        nome,
+                        imagem,
+                        descricao,
+                        preco,
+                    })}'
                     onclick="CartShow.showItens(this)"
                   >
                     <i class="fa-solid fa-cart-shopping"></i>
@@ -91,29 +89,18 @@ class LoadItens {
               </div>
             </div>
           `;
-          
-          
-
         });
-
-
-
     }
-
-
-
 }
 
-
-
 class Alert {
-    static alertMy(text, icon, myText){
-        const alerta = document.getElementById(`alerta`)
+    static alertMy(text, icon, myText) {
+        const alerta = document.getElementById(`alerta`);
 
-        alerta.classList.remove('hidden');
-        setTimeout(() => alerta.classList.add('hidden'), 4000);
+        alerta.classList.remove("hidden");
+        setTimeout(() => alerta.classList.add("hidden"), 4000);
 
-        alerta.innerHTML =`  <div class="flex-shrink-0 bg-green-100 text-green-600 p-2 rounded-full">
+        alerta.innerHTML = `  <div class="flex-shrink-0 bg-green-100 text-green-600 p-2 rounded-full">
 <i class="${icon}"></i>
 
     </div>
@@ -123,38 +110,34 @@ class Alert {
     </div>
     <button onclick="fecharAlerta()" class="text-gray-400 hover:text-gray-700 ml-auto">
       <i data-lucide="x" class="w-5 h-5"></i>
-    </button>`
+    </button>`;
     }
 }
 
 class CartShow {
-  static value = 0
-    static showItens(btn){
-      
+    static value = 0;
+    static showItens(btn) {
         const produto = JSON.parse(btn.dataset.produto);
 
-
-
-
-        const cart = document.getElementById(`cart`)
+        const cart = document.getElementById(`cart`);
 
         const items = cart.querySelectorAll("li[data-id]");
 
-    
-        
-        const ids = Array.from(items).map(item => item.dataset.id);
-
-        
+        const ids = Array.from(items).map((item) => item.dataset.id);
 
         if (ids.includes(String(produto.id))) {
-            return Alert.alertMy(`ja existe esse item no carrinho.`,`fas fa-info-circle`,`error`)
+            return Alert.alertMy(
+                `ja existe esse item no carrinho.`,
+                `fas fa-info-circle`,
+                `error`
+            );
         }
 
-
-
-                
-         Alert.alertMy(`adicionado no carrinho`,`fas fa-check-circle`,`sucesso total!`)
-     
+        Alert.alertMy(
+            `adicionado no carrinho`,
+            `fas fa-check-circle`,
+            `sucesso total!`
+        );
 
         cart.innerHTML += `<li class="flex py-6" data-id="${produto.id}"> 
         <div class="size-24 shrink-0 overflow-hidden rounded-md border border-gray-200">
@@ -176,53 +159,190 @@ class CartShow {
           </div>
         </div>
    </li>
-`
+`;
 
+        const showPrice = document.getElementById(`subtotalValue`);
 
+        this.value += Number(produto.preco);
 
-const showPrice = document.getElementById(`subtotalValue`)
+        const precoFormatado = this.value.toLocaleString("pt-BR", {
+            style: "currency",
+            currency: "BRL",
+        });
 
-this.value += Number(produto.preco)
-
-
-
-
-
-
-
-
-
-const precoFormatado = this.value.toLocaleString("pt-BR", {
-   style: "currency",
-   currency: "BRL"
-});
-
-
-showPrice.innerHTML = precoFormatado;
-
+        showPrice.innerHTML = precoFormatado;
     }
-
-
-    
 }
-
 
 class BtnPay {
-    static btnSendV(){
-        const checkoutBtn = document.getElementById(`checkoutBtn`)
-        console.log(checkoutBtn);
-        
+    static checkoutBtn = document.getElementById(`checkoutBtn`);
 
-        checkoutBtn.addEventListener(`click`,() => {
-            // const cart = document.getElementById(`cart`)
-            // const items = cart.querySelectorAll("li[data-id]");
+    static btnCep() {
+        const btncEP = document.getElementById(`consultarCep`);
 
-            // const ids = Array.from(items).map(item => item.dataset.id);
-            // console.log(ids);
-            
-            // alert(items)
-        })
+        btncEP.addEventListener(`click`, () => {
+            CepConsultar.consultarCep(btncEP);
+        });
     }
 }
-LoadItens.load()
-BtnPay.btnSendV()
+
+LoadItens.load();
+
+BtnPay.btnCep();
+
+class GetIdUser {
+    static async getId() {
+        const data = await fetch(`http://localhost:8000/idUser`);
+
+        return await data.json();
+    }
+}
+
+class SendAddreas {
+    static async sendAddreas() {
+        const getLocalStorage = JSON.parse(localStorage.getItem("dados"));
+        const id = await GetIdUser.getId();
+
+        getLocalStorage.userId = id.idUser;
+        console.log(getLocalStorage);
+        
+
+
+        const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute("content");
+
+        const data = await fetch("http://localhost:8000/addreas", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRF-TOKEN": csrfToken,
+            },
+            body: JSON.stringify(getLocalStorage),
+        });
+
+        console.log(data);
+        
+
+        if (data.ok) {
+          AlertJs.alertJs(
+            `parabens`,
+            `success`,
+            `o seu endereco foi cadastrado com sucesso.`
+        );
+
+
+
+        }
+
+
+        const result = await data.json()
+        console.log(result);
+        console.log(data);
+        
+        
+    }
+}
+
+
+class AlertJs {
+    static alertJs(title, icon, text) {
+        Swal.fire({
+            title: title,
+            text: text,
+            icon: icon,
+        });
+    }
+
+    static async alertCofirm(title, text, icon) {
+        const result = await Swal.fire({
+            title: title,
+            text: text,
+            icon: icon,
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "confirmar",
+        });
+
+        if (result.isConfirmed) {
+            await SendAddreas.sendAddreas();
+          
+        }
+
+        document.getElementById(`dialog`).showModal();
+    }
+}
+
+class CepConsultar {
+    static async consultarCep(btn) {
+        const token = document
+            .querySelector('meta[name="csrf-token"]')
+            .getAttribute("content");
+        const cep = document.getElementById(`cep`).value;
+
+        btn.innerHTML = `aguarde estamos consultando...`;
+
+        const response = await fetch("http://localhost:8000/cep", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRF-TOKEN": token,
+            },
+            body: JSON.stringify({ cep: cep }),
+        });
+
+        btn.innerHTML = `Consultar cep`;
+        const data = await response.json();
+        if (response.ok) {
+            const { address, city, state } = data.cep;
+            localStorage.setItem(`dados`, JSON.stringify(data.cep));
+
+            await AlertJs.alertCofirm(
+                `confirme seus dados`,
+                `${address + ` ` + city + `/` + state}`,
+                `info`
+            );
+
+            return;
+        }
+
+        AlertJs.alertJs(
+            `erro ao consultar cep!`,
+            `error`,
+            data.errors.cep.join(`\n`)
+        );
+    }
+}
+
+class AdreasExist {
+    static async getIdUser() {
+        const data = await fetch(`http://localhost:8000/idUser`);
+
+        const json = await data.json();
+
+        await this.getAddreasExist(json.idUser);
+    }
+
+    static async getAddreasExist(id) {
+        const data = await fetch(
+            `http://localhost:8000/userExistAddreas/${id}`
+        );
+        const testes = await data.json();
+
+        if (testes.success.length <= 0) {
+            AlertJs.alertJs(
+                `aviso`,
+                `info`,
+                `voce nao tem um endereco, informe um.`
+            );
+
+            setTimeout(() => {
+                document.getElementById(`dialog`).showModal();
+                BtnPay.btnCep();
+            }, 3000);
+
+            return;
+        }
+    }
+}
+
+AdreasExist.getIdUser();

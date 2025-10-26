@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CepController;
 use App\Http\Controllers\ControllerProducts;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -17,6 +18,11 @@ Route::get('/crud', function () {
 
 Route::post('/product', [ControllerProducts::class, 'insertProducts']);
 Route::get('/product', [ControllerProducts::class, 'getProducts']);
+
+Route::post('/cep', [CepController::class, 'getCep']);
+Route::post('/addreas', [CepController::class, 'insertAddreas']);
+Route::get('/userExistAddreas/{id}', [CepController::class, 'getUserExistAddreas']);
+Route::get('/idUser', [ProfileController::class, 'getIduser']);
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
