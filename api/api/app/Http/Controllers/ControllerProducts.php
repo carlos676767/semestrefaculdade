@@ -63,4 +63,8 @@ final class ControllerProducts extends Controller
     static public function getProducts()  {
         return   Produto::getProdutcts();
     }
+
+
+
+    
 }

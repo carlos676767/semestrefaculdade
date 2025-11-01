@@ -16,7 +16,7 @@ return new class extends Migration
         CREATE TABLE pagamentos (
             id_pagamento INT  AUTO_INCREMENT PRIMARY KEY,
             id_pedido INT NOT NULL,
-            tipo_pagamento ENUM('mp','stripe') NOT NULL,
+          tipo_pagamento ENUM('mp','stripe') NOT NULL,
           FOREIGN KEY (id_pedido) REFERENCES pedidos(id) ON DELETE CASCADE
 
         ) 

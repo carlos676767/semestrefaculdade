@@ -116,7 +116,7 @@ class Alert {
 
 class CartShow {
     static value = 0;
-    static showItens(btn) {
+    static async showItens(btn) {
         const produto = JSON.parse(btn.dataset.produto);
 
         const cart = document.getElementById(`cart`);
@@ -162,6 +162,7 @@ class CartShow {
 `;
 
         const showPrice = document.getElementById(`subtotalValue`);
+        const totalValue = document.getElementById(`totalValue`)
 
         this.value += Number(produto.preco);
 
@@ -171,6 +172,8 @@ class CartShow {
         });
 
         showPrice.innerHTML = precoFormatado;
+    
+        totalValue.innerHTML = this.value  +   Number( localStorage.getItem(`frete`))
     }
 }
 
@@ -194,6 +197,7 @@ class GetIdUser {
     static async getId() {
         const data = await fetch(`http://localhost:8000/idUser`);
 
+       
         return await data.json();
     }
 }
@@ -204,7 +208,7 @@ class SendAddreas {
         const id = await GetIdUser.getId();
 
         getLocalStorage.userId = id.idUser;
-        console.log(getLocalStorage);
+      
         
 
 
@@ -219,11 +223,11 @@ class SendAddreas {
             body: JSON.stringify(getLocalStorage),
         });
 
-        console.log(data);
+
         
 
         if (data.ok) {
-          AlertJs.alertJs(
+       return   AlertJs.alertJs(
             `parabens`,
             `success`,
             `o seu endereco foi cadastrado com sucesso.`
@@ -234,13 +238,17 @@ class SendAddreas {
         }
 
 
-        const result = await data.json()
-        console.log(result);
-        console.log(data);
+        AlertJs.alertJs(
+            `error ao cadastrar`,
+            `error`,
+            `tente novamente realizar o cadastro reiniciando a pagina.`
+        );
+
         
         
     }
 }
+
 
 
 class AlertJs {
@@ -313,13 +321,53 @@ class CepConsultar {
     }
 }
 
+
+
+async function showFrete(id) {
+   
+    const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    
+    const response = await fetch(`http://localhost:8000/frete/${id}`, {
+        method: 'GET', 
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': token 
+        },
+    });
+
+   const result = await response.json(); 
+   localStorage.setItem(`frete`,  result.success)
+   document.getElementById(`shippingValue`).innerText = result.success
+
+   return result
+}
+
+
 class AdreasExist {
-    static async getIdUser() {
+
+    static async getIdUser(){
         const data = await fetch(`http://localhost:8000/idUser`);
 
         const json = await data.json();
 
-        await this.getAddreasExist(json.idUser);
+        localStorage.setItem(`userId`, json.idUser)
+        return json.idUser
+    }
+
+    
+    static async setValuesId() {
+       
+        const id = await AdreasExist.getIdUser()
+        
+        await this.getAddreasExist(id);
+    
+
+        await showFrete(id)
+
+    
+
+
+
     }
 
     static async getAddreasExist(id) {
@@ -345,4 +393,73 @@ class AdreasExist {
     }
 }
 
-AdreasExist.getIdUser();
+
+AdreasExist.setValuesId();
+
+
+class Payment {
+    static async paymant() {
+        const select = document.querySelector(`select`).value;
+        const items = cart.querySelectorAll("li[data-id]");
+        const ids = Array.from(items).map((item) => Number(item.dataset.id));
+        const idUser = localStorage.getItem(`userId`);
+
+        console.log({ ids, idUser, select });
+
+       
+        const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+        try {
+            const response = await fetch("http://localhost:8000/pay", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRF-TOKEN": csrfToken, 
+                },
+                body: JSON.stringify({
+                    user_id: idUser,
+                    metodo_pagamento: select,
+                    produtos: ids,
+                }),
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                const messages = Object.values(data).join('\n'); 
+              return  AlertJs.alertJs(`error ao realizar compra`, `error`, messages)
+                
+               
+            }
+
+         
+            const redirectPage = document.createElement("a");
+            redirectPage.href = data.success;
+            redirectPage.target = "_blank";
+            document.body.appendChild(redirectPage);
+            redirectPage.click();
+            document.body.removeChild(redirectPage); 
+            
+          
+
+        } catch (error) {
+            AlertJs.alertJs(`error ao realizar compra`, `error`, error.message)
+        }
+    }
+}
+
+
+
+class buttonPay {
+    static btnPays(){
+        const checkoutBtn = document.getElementById(`checkoutBtn`);
+
+
+        checkoutBtn.addEventListener(`click`, () => {
+            Payment.paymant()
+        })
+    }
+}
+
+
+buttonPay.btnPays()

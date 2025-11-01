@@ -295,7 +295,7 @@
               <p>Total</p>
               <p id="totalValue">$–</p>
             </div>
-            <p class="mt-0.5 text-sm text-gray-500">O frete será calculado ao informar o CEP.</p>
+           
 
             <!-- Botão Checkout -->
             <div class="mt-6">
