@@ -432,7 +432,8 @@ class Payment {
                
             }
 
-         
+            console.log(data.success);
+            
             const redirectPage = document.createElement("a");
             redirectPage.href = data.success;
             redirectPage.target = "_blank";
@@ -442,6 +443,17 @@ class Payment {
             
           
 
+            const socket = io("http://localhost:3000", { query: { idUser } });
+
+            socket.on("connect", () => {
+              console.log("Socket conectado com id:", socket.id);
+            });
+          
+            socket.on("sucesso", (data) => {
+                console.log(data);
+                
+              alert(`💰 Pagamento confirmado! Valor: R$${data.valor}`);
+            });
         } catch (error) {
             AlertJs.alertJs(`error ao realizar compra`, `error`, error.message)
         }

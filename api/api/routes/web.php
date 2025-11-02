@@ -18,6 +18,11 @@ Route::get('/crud', function () {
 });
 
 
+Route::get('/404', function () {
+    return view('404Page');
+});
+
+
 Route::post('/product', [ControllerProducts::class, 'insertProducts']);
 Route::get('/product', [ControllerProducts::class, 'getProducts']);
 

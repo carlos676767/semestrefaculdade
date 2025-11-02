@@ -9,7 +9,7 @@ final class StripeService
     {
         return [
             'success_url' => 'http://localhost:8000/',
-            'cancel_url'  => 'http://127.0.0.1:5500/view/pagamentoCancelado.html'
+            'cancel_url'  => 'http://localhost:8000/404'
         ];
     }
 
@@ -25,7 +25,7 @@ final class StripeService
         ];
     }
 
-    static public function createPay(int $price)
+    static public function createPay(int $price, $idUser)
     {
         try {
             $checkoutSession = \Stripe\Checkout\Session::create([
@@ -39,7 +39,11 @@ final class StripeService
                     ],
                 ],
                 'mode' => 'payment',
-                ...self::redirectUrl()
+                ...self::redirectUrl(),
+
+                'metadata' => [            
+                    'user_id' => $idUser    
+                ],
             ]);
 
             return $checkoutSession->url;

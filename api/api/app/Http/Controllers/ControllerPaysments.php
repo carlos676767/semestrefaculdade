@@ -55,7 +55,7 @@ final class ControllerPaysments extends Controller
       $sumFinaly = $frete + (float)  $modelSumItensDb[0]->price;
 
 
-      $payResult = ServiceOptionPay::main($metodo_pagamento,$sumFinaly);
+      $payResult = ServiceOptionPay::main($metodo_pagamento,$sumFinaly, $user_id);
 
 
       ModelInsertItensPay::main($user_id, $produtos);
