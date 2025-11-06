@@ -397,6 +397,32 @@ class AdreasExist {
 AdreasExist.setValuesId();
 
 
+function notification() {
+    const notification = document.getElementById('paymentNotification');
+    const closeBtn = document.getElementById('closePaymentNotification');
+
+    const myTitlleDefault = document.title
+
+    document.title = "🔔 Você tem uma nova notificação!";
+
+    
+    setTimeout(() => {
+        notification.classList.remove('translate-x-full');
+        notification.classList.add('translate-x-0');
+      }, 100);
+   
+    closeBtn.addEventListener('click', () => {
+      notification.classList.remove('translate-x-0');
+      notification.classList.add('translate-x-full');
+    });
+
+    
+    setTimeout(() => {
+      notification.classList.remove('translate-x-0');
+      notification.classList.add('translate-x-full');
+      document.title = myTitlleDefault
+    }, 30000);
+}
 class Payment {
     static async paymant() {
         const select = document.querySelector(`select`).value;
@@ -450,9 +476,8 @@ class Payment {
             });
           
             socket.on("sucesso", (data) => {
-                console.log(data);
-                
-              alert(`💰 Pagamento confirmado! Valor: R$${data.valor}`);
+                notification()
+
             });
         } catch (error) {
             AlertJs.alertJs(`error ao realizar compra`, `error`, error.message)

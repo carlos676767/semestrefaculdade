@@ -27,22 +27,11 @@ final class hiverSine
     $c = 2 * atan2(sqrt($a), sqrt(1 - $a));
 
     return $raioTerra * $c;
-
-   
-   
     }
 
 
     static public function getSumKms($lat, $lon)  {
        
-
-     
-
-
-     
-
-    
-
         $result = hiverSine::hiverSineCords($lat, $lon);
         return floor($result /100);
 

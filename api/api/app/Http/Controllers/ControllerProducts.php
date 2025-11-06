@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ModelUpdatePedidos;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
@@ -13,10 +14,10 @@ final class ControllerProducts extends Controller
     public function insertProducts(Request $req)
     {
         try {
-           
+
             $data = json_decode($req->input('data'), true);
 
-         
+
             $validator = Validator::make(
                 array_merge($data, ['image' => $req->file('image')]),
                 [
@@ -40,7 +41,7 @@ final class ControllerProducts extends Controller
                 ], 400);
             }
 
-          
+
             $file = $req->file('image');
             $path = $file->store('uploads', 'public');
 
@@ -50,7 +51,6 @@ final class ControllerProducts extends Controller
             return response()->json([
                 'status' => 'sucesso',
             ], 201);
-
         } catch (\Throwable $th) {
             return response()->json([
                 'status' => 'erro',
@@ -60,11 +60,29 @@ final class ControllerProducts extends Controller
     }
 
 
-    static public function getProducts()  {
+    static public function getProducts()
+    {
         return   Produto::getProdutcts();
     }
 
 
 
-    
+
+    static public function updateItemPay($id)
+    {
+        try {
+
+            ModelUpdatePedidos::update($id);
+            return response()->json([
+                'success' =>   'sucesso',
+            ], 200);
+
+        } catch (\Throwable $th) {
+
+            return response()->json([
+                'error' => 'Erro ao atualizar tente novamente.',
+            ], 400);
+
+        }
+    }
 }

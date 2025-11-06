@@ -3,6 +3,8 @@ import http from "http";
 import { Server } from "socket.io";
 import bodyParser from "body-parser";
 
+import axios from "axios";
+
 
 const app = express();
 const server = http.createServer(app);
@@ -29,7 +31,8 @@ io.on("connection", (socket) => {
 
 
 
-app.post("/webHookStripe", (req, res) => {
+app.post("/webHookStripe", async(req, res) => {
+    
   const event = req.body;
  
   
@@ -42,9 +45,16 @@ app.post("/webHookStripe", (req, res) => {
 
     io.to(userId).emit("sucesso", {
       mensagem: "Pagamento confirmado!",
-      valor: session.amount_total / 100
+ 
     });
+
+
+    const data = await axios.get(`http://localhost:8000/updateItens/${userId}`)
+
+    console.log(data);
+    
   }
+
 
   res.sendStatus(200);
 });

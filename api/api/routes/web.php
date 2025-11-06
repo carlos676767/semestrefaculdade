@@ -25,13 +25,14 @@ Route::get('/404', function () {
 
 Route::post('/product', [ControllerProducts::class, 'insertProducts']);
 Route::get('/product', [ControllerProducts::class, 'getProducts']);
-
+Route::get('/updateItens/{id}', [ControllerProducts::class, 'updateItemPay']);
 Route::post('/cep', [CepController::class, 'getCep']);
 Route::post('/addreas', [CepController::class, 'insertAddreas']);
 Route::get('/userExistAddreas/{id}', [CepController::class, 'getUserExistAddreas']);
 Route::get('/idUser', [ProfileController::class, 'getIduser']);
 Route::get('/frete/{userId}', [FreteController::class, 'getFrete']);
 Route::post('/pay', [ControllerPaysments::class, 'main']);
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

@@ -323,17 +323,38 @@
 </el-dialog>
 
 
-
+<div class="relative w-full max-w-lg bg-gray-900 rounded-xl shadow-2xl overflow-hidden mx-auto my-10">
+    <div id="paymentNotification" class="fixed top-5 right-5 z-50 max-w-sm w-full bg-green-50/90 backdrop-blur-md border border-green-200 rounded-xl shadow-lg p-4 transform translate-x-full transition-transform duration-500 ease-in-out">
+  <div class="flex items-start space-x-3">
+    <div class="flex-shrink-0">
+      <svg class="h-6 w-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+      </svg>
+    </div>
+    <div class="flex-1">
+      <p class="text-sm font-semibold text-green-800">Pagamento realizado!</p>
+      <p class="mt-1 text-sm text-green-700">O seu pagamento foi concluído com sucesso.</p>
+    </div>
+    <button id="closePaymentNotification" class="text-green-400 hover:text-green-600">
+      <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+      </svg>
+    </button>
+  </div>
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/@tailwindplus/elements@1" type="module"></script>
 
 
-<!-- Modal -->
+
 <el-dialog>
+
+
   <dialog id="dialog" class="rounded-xl overflow-hidden" aria-labelledby="dialog-title">
+    
     <el-dialog-backdrop class="fixed inset-0 bg-black/50 transition-opacity"></el-dialog-backdrop>
 
-    <div class="relative w-full max-w-lg bg-gray-900 rounded-xl shadow-2xl overflow-hidden mx-auto my-10">
+  
       <div class="px-6 py-6">
         <h3 id="dialog-title" class="text-lg font-semibold text-white mb-4">Consultar CEP</h3>
 
@@ -363,6 +384,7 @@
     </div>
   </dialog>
 </el-dialog>
+
 
 
 
