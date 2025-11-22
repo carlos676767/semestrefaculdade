@@ -93,4 +93,13 @@ final class ControllerProducts extends Controller
             'success' =>   ModelGetItensId::getItensCount(),
         ], 200);
     }
+
+
+    
+    static public function getItensUser($id)  {
+        return response()->json([
+            'success' =>   ModelGetItensId::getItemMy($id),
+        ], 200);
+    }
+
 }

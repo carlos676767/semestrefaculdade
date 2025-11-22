@@ -505,3 +505,19 @@ class buttonPay {
 
 
 buttonPay.btnPays()
+
+
+
+async function showItensPay() {
+
+    const idUser = localStorage.getItem(`userId`);
+    const data = await fetch(`http://localhost:8000/itens/${idUser}`)
+    const response = await data.json()
+
+
+    document.getElementById(`itens`).innerHTML = response.success.map(c => c.item_formatado).join(`\n`)
+    
+}
+
+
+showItensPay()

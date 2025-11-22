@@ -33,6 +33,7 @@ Route::get('/idUser', [ProfileController::class, 'getIduser']);
 Route::get('/frete/{userId}', [FreteController::class, 'getFrete']);
 Route::post('/pay', [ControllerPaysments::class, 'main']);
 Route::get('/test', [ControllerPaysments::class, 'test']);
+Route::get('/itens/{id}', [ControllerProducts::class, 'getItensUser']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
