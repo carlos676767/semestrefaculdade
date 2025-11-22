@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ModelGetItensId;
 use App\Models\ModelUpdatePedidos;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -84,5 +85,12 @@ final class ControllerProducts extends Controller
             ], 400);
 
         }
+    }
+
+
+    static public function getProductsCount()  {
+        return response()->json([
+            'success' =>   ModelGetItensId::getItensCount(),
+        ], 200);
     }
 }

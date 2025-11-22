@@ -7,6 +7,7 @@ use App\Models\modelInsertCepUser;
 use App\Models\ModelInsertItensPay;
 use App\Models\ModelSumItens;
 use App\Providers\hiverSine;
+use App\Providers\MercadoPago;
 use App\Providers\ResultKmsSum;
 use App\Providers\ServiceOptionPay;
 use Illuminate\Http\Request;
@@ -70,5 +71,13 @@ final class ControllerPaysments extends Controller
     }
 
     
+  }
+
+
+  static public function test()  {
+    return response()->json([
+       
+      'message' => MercadoPago::pix(2,2,2),
+    ], 200);
   }
 }

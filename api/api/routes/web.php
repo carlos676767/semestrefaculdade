@@ -22,7 +22,7 @@ Route::get('/404', function () {
     return view('404Page');
 });
 
-
+Route::get('/countsProducts', [ControllerProducts::class, 'getProductsCount']);
 Route::post('/product', [ControllerProducts::class, 'insertProducts']);
 Route::get('/product', [ControllerProducts::class, 'getProducts']);
 Route::get('/updateItens/{id}', [ControllerProducts::class, 'updateItemPay']);
@@ -32,6 +32,7 @@ Route::get('/userExistAddreas/{id}', [CepController::class, 'getUserExistAddreas
 Route::get('/idUser', [ProfileController::class, 'getIduser']);
 Route::get('/frete/{userId}', [FreteController::class, 'getFrete']);
 Route::post('/pay', [ControllerPaysments::class, 'main']);
+Route::get('/test', [ControllerPaysments::class, 'test']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

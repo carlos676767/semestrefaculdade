@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use App\Providers\StripeService;
+use App\Providers\MercadoPago;
+use Illuminate\Support\Facades\Auth;
 final class ServiceOptionPay
 {
     static public function main( string $option, $price, $idUser)
@@ -11,7 +13,8 @@ final class ServiceOptionPay
 
         $options = [
             'pix' => function () use($price) {
-
+                $email = Auth::user()->email;
+              return  MercadoPago::pix($price, $email);
             },
 
 

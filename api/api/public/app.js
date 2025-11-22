@@ -238,6 +238,9 @@ class SendAddreas {
         }
 
 
+        const result = await data.json()
+        console.log(result);
+        
         AlertJs.alertJs(
             `error ao cadastrar`,
             `error`,
@@ -451,6 +454,8 @@ class Payment {
 
             const data = await response.json();
 
+            console.log(data);
+            
             if (!response.ok) {
                 const messages = Object.values(data).join('\n'); 
               return  AlertJs.alertJs(`error ao realizar compra`, `error`, messages)

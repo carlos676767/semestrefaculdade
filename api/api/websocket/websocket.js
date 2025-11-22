@@ -40,14 +40,14 @@ app.post("/webHookStripe", async(req, res) => {
     const session = event.data.object;
     const userId = session.metadata.user_id; 
 
-    console.log(userId);
+  
     
 
     io.to(userId).emit("sucesso", {
       mensagem: "Pagamento confirmado!",
  
     });
-
+    
 
     const data = await axios.get(`http://localhost:8000/updateItens/${userId}`)
 
@@ -59,4 +59,18 @@ app.post("/webHookStripe", async(req, res) => {
   res.sendStatus(200);
 });
 
-server.listen(3000, () => console.log("Servidor Socket.IO rodando na porta 3000 🚀"));
+
+
+
+app.post('/mercadoPago', async(req, res) => {
+  if (req.body.action === `payment.updated`) {
+    const [[chave, valor]] = connectedUsers.entries();
+    await axios.get(`http://localhost:8000/updateItens/${Number(chave)}`)
+    
+
+    
+  }
+  res.sendStatus(201);
+});
+
+server.listen(3000, () => console.log("Servidor Socket.IO rodando na porta 3000 🚀")); 

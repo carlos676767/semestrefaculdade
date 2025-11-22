@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Providers;
-\Stripe\Stripe::setApiKey('sk_test_51Q99ARRs5GhZx5A4AEgEDmULaaAesw4zKA0LSftIMjQptO93OvsXWX1zqB7GPE8nuG9AkRcwWiLbunHjC6l369Qd00qrLpseLH');
+\Stripe\Stripe::setApiKey(env('STRIPEYOSCRETKEY'));
+
 
 final class StripeService
 {

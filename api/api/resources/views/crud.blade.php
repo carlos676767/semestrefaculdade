@@ -80,17 +80,17 @@
       </div>
       <div class="glass rounded-2xl p-6 shadow-md">
         <div class="flex items-center justify-between">
-          <p class="text-gray-600">Pedidos Hoje</p>
+          <p class="text-gray-600" >Total pedidos</p>
           <i data-lucide="truck" class="w-5 h-5 text-indigo-600"></i>
         </div>
-        <h3 class="text-2xl font-semibold mt-2" id="totalPedidos">3</h3>
+        <h3 class="text-2xl font-semibold mt-2" id="totalPedidos"></h3>
       </div>
       <div class="glass rounded-2xl p-6 shadow-md">
         <div class="flex items-center justify-between">
-          <p class="text-gray-600">Faturamento</p>
+          <p class="text-gray-600">Produtos vendidos</p>
           <i data-lucide="dollar-sign" class="w-5 h-5 text-indigo-600"></i>
         </div>
-        <h3 class="text-2xl font-semibold mt-2">R$ 12.400</h3>
+        <h3 class="text-2xl font-semibold mt-2" id="vendidos">R$ 12.400</h3>
       </div>
     </div>
 
@@ -273,6 +273,24 @@
 
 
  
+async function getCountItens() {
+  const data = await fetch(`http://localhost:8000/countsProducts`)
+  const result = await data.json()
+
+  console.log(result.success[0]);
+
+ const itm = document.getElementById(`totalProdutos`)
+
+ const totalPedidos = document.getElementById(`totalPedidos`)
+ const vendidos = document.getElementById(`vendidos`)
+ itm.innerText = result.success[0].itensCadastrados
+ totalPedidos.innerHTML = result.success[0].pedidosFeitos
+ 
+ vendidos.innerHTML = result.success[0].totalVendidos
+ }
+
+
+ getCountItens()
 </script>
 
 </body>
