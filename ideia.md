@@ -34,25 +34,25 @@ Acompanhamento do pedido (status: recebido, em preparo, a caminho, entregue).
 
 ⚙ Backend (Laravel)
 
-Responsável por:
+Responsável por: [x]
 
-Autenticação e segurança.
+Autenticação e segurança[x]
 
-Banco de dados (produtos, clientes, pedidos, endereços, estoque).
+Banco de dados (produtos, clientes, pedidos, endereços, estoque)[x]
 
-API REST para React Native e Electron consumirem.
+API REST para React Native e Electron consumirem[x]
 
-Cálculo de entrega:
+Cálculo de entrega: [x]
 
-Recebe endereço do cliente e do negócio.
+Recebe endereço do cliente e do negócio[x]
 
-Consulta API (Google/OSM/Here) → pega distância.
+Consulta API (Google/OSM/Here) → pega distância[x]
 
-Calcula custo com base em km e combustível.
+Calcula custo com base em km e combustível[x]
 
-Integração com pagamentos.
+Integração com pagamentos[x]
 
-Gerenciamento de estoque.
+Gerenciamento de estoque[x]
 
 
 
@@ -67,7 +67,7 @@ Dashboard (pedidos em andamento, entregues, cancelados).
 
 Gerenciar produtos e preços.
 
-Controle de estoque.
+
 
 Relatórios em PDF/Excel (ex: vendas por período, gastos com frete).
 

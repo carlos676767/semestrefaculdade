@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mapa Grátis</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <style>
+    #map {
+      height: 500px;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script>
+    // Sua coordenada
+    const lat = -15.793889;
+    const lon = -47.882778;
+
+    // Criar mapa
+    const map = L.map('map').setView([lat, lon], 16);
+
+    // Camada de mapa grátis do OSM
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '© OpenStreetMap'
+    }).addTo(map);
+
+    // Marcador opcional
+    L.marker([lat, lon]).addTo(map)
+      .bindPopup("Local encontrado")
+      .openPopup();
+  </script>
+</body>
+</html>

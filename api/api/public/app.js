@@ -521,3 +521,19 @@ async function showItensPay() {
 
 
 showItensPay()
+
+
+
+ function getPdf() {
+    const pdfBtn = document.getElementById(`pdf`)
+
+
+    const idUser = localStorage.getItem(`userId`);
+    pdfBtn.addEventListener(`click`, () => {
+       location.href =`http://localhost:8000/pdf/${idUser}`
+
+       
+    })
+}
+
+getPdf()

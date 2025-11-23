@@ -4,6 +4,7 @@ use App\Http\Controllers\CepController;
 use App\Http\Controllers\ControllerPaysments;
 use App\Http\Controllers\ControllerProducts;
 use App\Http\Controllers\FreteController;
+use App\Http\Controllers\PdfController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -34,7 +35,7 @@ Route::get('/frete/{userId}', [FreteController::class, 'getFrete']);
 Route::post('/pay', [ControllerPaysments::class, 'main']);
 Route::get('/test', [ControllerPaysments::class, 'test']);
 Route::get('/itens/{id}', [ControllerProducts::class, 'getItensUser']);
-
+Route::get('/pdf/{id}', [PdfController::class, 'pdfGenerate']);
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
