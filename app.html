@@ -1,152 +1,90 @@
-<!doctype html>
-<html lang="pt-BR">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>Pedido #{{ $pedido['id'] ?? '---' }}</title>
-  <style>
-    /* Reset simples */
-    * { box-sizing: border-box; font-family: "DejaVu Sans", Arial, sans-serif; }
-    body { margin: 0; padding: 0; color: #222; }
-    .container { padding: 24px; }
-
-    /* Cabeçalho */
-    .header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 2px solid #f0f0f0;
-      padding-bottom: 12px;
-      margin-bottom: 16px;
-    }
-    .logo {
-      width: 120px;
-      height: 60px;
-      background: #f5f5f5;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #777;
-      font-size: 12px;
-      border-radius: 6px;
-    }
-    .company {
-      text-align: right;
-    }
-    .company h2 { margin: 0; font-size: 18px; }
-    .company p { margin: 2px 0; font-size: 12px; color: #555; }
-
-    /* Dados do pedido */
-    .info {
-      display: flex;
-      justify-content: space-between;
-      margin: 18px 0;
-    }
-    .info .left, .info .right { font-size: 13px; color: #333; }
-
-    /* Tabela */
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 8px;
-      font-size: 13px;
-    }
-    table thead th {
-      text-align: left;
-      padding: 10px;
-      border-bottom: 2px solid #e6e6e6;
-      background: #fafafa;
-    }
-    table tbody td {
-      padding: 10px;
-      border-bottom: 1px solid #f0f0f0;
-    }
-    .text-right { text-align: right; }
-    .qty { width: 70px; }
-
-    /* Totais */
-    .totals {
-      margin-top: 12px;
-      display: flex;
-      justify-content: flex-end;
-    }
-    .totals .box {
-      width: 260px;
-      border-top: 2px solid #e6e6e6;
-      padding-top: 10px;
-      font-size: 14px;
-    }
-    .totals .box .line { display:flex; justify-content:space-between; margin-bottom:6px; }
-
-    /* Rodapé */
-    .footer {
-      margin-top: 28px;
-      border-top: 1px dashed #eee;
-      padding-top: 10px;
-      font-size: 11px;
-      color: #777;
-      text-align: center;
-    }
-  </style>
+  <meta charset="UTF-8">
+  <title>i18n JS Puro</title>
 </head>
 <body>
-  <div class="container">
-    <header class="header">
-      <div class="logo">
-        LOGO
-      </div>
+  <h1 id="title"></h1>
+  <p id="text"></p>
 
-      <div class="company">
-        <h2>{{ $company['name'] }}</h2>
-        <p>{{ $company['address'] }}</p>
-        <p>{{ $company['phone'] }}</p>
-      </div>
-    </header>
+  <button onclick="changeLang('pt')">Português</button>
+  <button onclick="changeLang('en')">English</button>
 
-    <section class="info">
-      <div class="left">
-        <strong>Pedido:</strong> #{{ $pedido['id'] }}<br>
-        <strong>Cliente:</strong> {{ $pedido['user'] }}
-      </div>
-      <div class="right">
-        <strong>Data:</strong> {{ $pedido['date'] }}<br>
-        <strong>Status:</strong> <span>Em processamento</span>
-      </div>
-    </section>
+  <script src="https://unpkg.com/i18next@23.0.0/dist/umd/i18next.min.js"></script>
+  <script src="app.js"></script>
 
-    <section class="items">
-      <table>
-        <thead>
-          <tr>
-            <th>Produto</th>
-            <th class="qty">Qtd</th>
-            <th class="text-right">Preço Unit.</th>
-            <th class="text-right">Subtotal</th>
-          </tr>
-        </thead>
-        <tbody>
-          @foreach($items as $item)
-          <tr>
-            <td>{{ ucfirst($item['name']) }}</td>
-            <td class="qty">{{ $item['qty'] }}</td>
-            <td class="text-right">R$ {{ number_format($item['price'], 2, ',', '.') }}</td>
-            <td class="text-right">R$ {{ number_format($item['subtotal'], 2, ',', '.') }}</td>
-          </tr>
-          @endforeach
-        </tbody>
-      </table>
 
-      <div class="totals">
-        <div class="box">
-          <div class="line"><span>Subtotal</span><span>R$ {{ number_format($total, 2, ',', '.') }}</span></div>
-          <!-- aqui você pode adicionar frete, descontos, etc -->
-          <div class="line" style="font-weight:700; font-size:16px;"><span>Total</span><span>R$ {{ number_format($total, 2, ',', '.') }}</span></div>
+
+  <div class="flex flex-col max-w-64 w-full text-sm">
+    <p class="font-medium text-gray-800 pb-2">Idioma</p>
+
+    <button class="peer group flex items-center justify-between w-full text-left px-2 py-2 border rounded bg-white text-gray-700 border-gray-300 shadow-sm hover:bg-gray-50 focus:outline-none">
+        <div class="flex items-center gap-2">
+            <img class="w-6 h-6 rounded-full" src="https://flagcdn.com/w40/br.png" alt="flag-pt">
+            <span>Português</span>
         </div>
-      </div>
-    </section>
 
-    <div class="footer">
-      Obrigado pela preferência — Qualquer dúvida entre em contato: {{ $company['phone'] }}
-    </div>
-  </div>
+        <svg width="11" height="17" viewBox="0 0 11 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9.92546 6L5.68538 1L1.44531 6" stroke="#6B7280" stroke-opacity="0.7" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M1.44564 11L5.68571 16L9.92578 11" stroke="#6B7280" stroke-opacity="0.7" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </button>
+
+    <ul class="hidden overflow-hidden peer-focus:block w-64 bg-white border border-gray-300 rounded shadow-md mt-1 py-2 right-0">
+
+        <!-- Português -->
+        <li class="px-2 py-2 flex items-center gap-2 hover:bg-indigo-500 hover:text-white cursor-pointer">
+            <img class="w-6 h-6 rounded-full" src="https://flagcdn.com/w40/br.png" alt="flag-pt">
+            <span>Português</span>
+        </li>
+
+        <!-- Inglês -->
+        <li class="px-2 py-2 flex items-center gap-2 hover:bg-indigo-500 hover:text-white cursor-pointer">
+            <img class="w-6 h-6 rounded-full" src="https://flagcdn.com/w40/us.png" alt="flag-en">
+            <span>English</span>
+        </li>
+
+        <!-- Espanhol -->
+        <li class="px-2 py-2 flex items-center gap-2 hover:bg-indigo-500 hover:text-white cursor-pointer">
+            <img class="w-6 h-6 rounded-full" src="https://flagcdn.com/w40/es.png" alt="flag-es">
+            <span>Español</span>
+        </li>
+
+    </ul>
+</div>
+
+  <script>
+
+i18next.init({
+  lng: "pt", 
+  resources: {
+    pt: {
+      translation: {
+        title: "Bem-vindo!",
+        text: "Este texto está em português."
+      }
+
+
+    },
+    en: {
+      translation: {
+        title: "Welcome!",
+        text: "This text is in English."
+      }
+    }
+  }
+}).then(updateContent);
+
+function updateContent() {
+  document.getElementById("title").innerText = i18next.t("title");
+  document.getElementById("text").innerText = i18next.t("text");
+}
+
+function changeLang(lang) {
+  i18next.changeLanguage(lang).then(updateContent);
+}
+
+  </script>
 </body>
 </html>

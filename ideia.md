@@ -25,7 +25,7 @@ Endereço de entrega (cliente digita ou seleciona pelo mapa).
 
 Cálculo automático do frete (backend recebe o endereço → consulta API de mapas → devolve valor).
 
-Pagamento (Pix, cartão, Mercado Pago etc.).
+Pagamento (Pix, cartão, Mercado Pago etc.)[x]
 
 Acompanhamento do pedido (status: recebido, em preparo, a caminho, entregue).
 

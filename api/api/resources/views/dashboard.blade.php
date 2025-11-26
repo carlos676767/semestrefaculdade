@@ -2,6 +2,16 @@
   
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+    <script src="https://unpkg.com/i18next@23.0.0/dist/umd/i18next.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.3/css/all.min.css"
+  integrity="sha512-yh+YHzW2LJ2K8Xv6a1NydtjT6hI5+6J6ySgFGrZ7gK+ShyzTqFqD4X/9L+I0rHZGzZg3U9qYr5x7jTvBf1X0iw=="
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer"
+/>
+
 
     <style>
          @keyframes rotate {
@@ -34,11 +44,48 @@
     .animate-slideIn {
       animation: slideIn 0.4s ease forwards;
     }
+
+
+
+
+    @keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+.animate-shimmer { animation: shimmer 3s infinite linear; }
+
+@keyframes fadeIn {
+  0% { opacity: 0; transform: translateY(-8px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+.animate-fadeIn { animation: fadeIn 0.8s ease-out forwards; }
+
+@keyframes slideDown {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(0); }
+}
+.animate-slideDown { animation: slideDown 0.5s ease-out; }
+
+@keyframes pulseSlow {
+  0%,100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+.animate-pulseSlow { animation: pulseSlow 2s infinite ease-in-out; }
     </style>
+
+
+
+
+
+
+
+
+
+
     <section id="section" name="header" class="bg-gradient-to-b px-3 sm:px-10 overflow-hidden from-[#F5F7FF] via-[#fffbee] to-[#E6EFFF] pt-6 h-full">
         <header class="flex items-center justify-between px-6 py-3 md:py-4 shadow-sm max-w-5xl rounded-full mx-auto w-full bg-white">
             <a href="#">
-                <img src="https://i.ibb.co/QfP6bG9/sorriso-logo.png" alt="Sorriso Supermercados Logo" class="h-10">
+                <img   src="{{ asset('img/mercado.png') }}" alt="Sorriso Supermercados Logo" class="h-10">
             </a>
 
             <nav id="menu" class="max-md:absolute max-md:top-0 max-md:left-0 max-md:overflow-hidden items-center justify-center max-md:h-full max-md:w-0 transition-[width] bg-white/50 backdrop-blur flex-col md:flex-row flex gap-8 text-gray-900 text-sm font-normal">
@@ -46,6 +93,51 @@
                 <a class="hover:text-indigo-600" href="#">
                     <i class="fa-solid fa-house"></i>
                     Home
+                </a>
+
+
+
+
+                <a  class="hover:text-indigo-600" href="#">
+                <div class="flex flex-col max-w-64 w-full text-sm">
+
+
+    <button class="peer group flex items-center justify-between w-full text-left px-2 py-2 border rounded bg-white text-gray-700 border-gray-300 shadow-sm hover:bg-gray-50 focus:outline-none">
+        <div class="flex items-center gap-2">
+            <img class="w-6 h-6 rounded-full" src="https://flagcdn.com/w40/br.png" alt="flag-pt">
+            <span>Português</span>
+        </div>
+
+        <svg width="11" height="17" viewBox="0 0 11 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9.92546 6L5.68538 1L1.44531 6" stroke="#6B7280" stroke-opacity="0.7" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M1.44564 11L5.68571 16L9.92578 11" stroke="#6B7280" stroke-opacity="0.7" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </button>
+
+    <ul class="hidden overflow-hidden peer-focus:block w-64 bg-white border border-gray-300 rounded shadow-md mt-1 py-2 right-0">
+
+        <!-- Português -->
+        <li class="px-2 py-2 flex items-center gap-2 hover:bg-indigo-500 hover:text-white cursor-pointer">
+            <img class="w-6 h-6 rounded-full" src="https://flagcdn.com/w40/br.png" alt="flag-pt">
+            <span>Português</span>
+        </li>
+
+        <!-- Inglês -->
+        <li class="px-2 py-2 flex items-center gap-2 hover:bg-indigo-500 hover:text-white cursor-pointer">
+            <img class="w-6 h-6 rounded-full" src="https://flagcdn.com/w40/us.png" alt="flag-en">
+            <span>English</span>
+        </li>
+
+        <!-- Espanhol -->
+        <li class="px-2 py-2 flex items-center gap-2 hover:bg-indigo-500 hover:text-white cursor-pointer">
+            <img class="w-6 h-6 rounded-full" src="https://flagcdn.com/w40/es.png" alt="flag-es">
+            <span>Español</span>
+        </li>
+
+    </ul>
+</div>
+
+                
                 </a>
                 <a class="hover:text-indigo-600" href="#">
                     <i class="fa-solid fa-bag-shopping"></i>
@@ -99,6 +191,7 @@
             </nav>
 
 
+            
             <div class="flex items-center space-x-4">
                 <button id="btndark" class="size-8 flex items-center justify-center hover:bg-gray-100 transition border border-slate-300 rounded-md">
                     <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -117,6 +210,38 @@
             </div>
         </header>
 
+        <div class="relative w-full py-2.5 font-medium text-sm text-white 
+            bg-gradient-to-r from-black via-red-600 to-black 
+            overflow-hidden animate-slideDown">
+
+    <!-- brilho passando -->
+    <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent 
+                animate-shimmer"></div>
+
+    <div class="relative max-w-screen-xl mx-auto flex flex-col sm:flex-row 
+                justify-between items-center text-center px-4 gap-4 animate-fadeIn">
+
+        <!-- TEXTOS DA PROMOÇÃO -->
+        <div class="flex flex-col sm:flex-row items-center gap-4">
+            <p><i class="fa-solid fa-fire-flame-curved"></i> <strong>Black Friday WEEK</strong></p>
+            <span class="hidden sm:inline animate-pulseSlow">|</span>
+
+            <p><i class="fa-solid fa-burst"></i> Até <strong>70% OFF</strong> em produtos selecionados</p>
+            <span class="hidden sm:inline animate-pulseSlow">|</span>
+
+            <p><i class="fa-solid fa-tag"></i> Cupom Extra: <strong>BLACK10</strong></p>
+            <span class="hidden sm:inline animate-pulseSlow">|</span>
+
+            <p><i class="fa-solid fa-hourglass-half"></i> Promoção até <strong>30/11</strong></p>
+        </div>
+
+   
+        <div class="flex items-center gap-2 text-yellow-300 font-bold text-sm tracking-wide">
+            <i class="fa-solid fa-clock fa-spin"></i>
+            <span id="clock">00:00:00</span>
+        </div>
+    </div>
+</div>
         <main class="flex-grow flex flex-col items-center max-w-7xl mx-auto w-full">
             <button class="mt-16 mb-6 flex items-center space-x-2 border border-indigo-600 text-indigo-600 text-xs rounded-full px-4 pr-1.5 py-1.5 hover:bg-indigo-50 transition" type="button">
                 <span>
@@ -440,6 +565,64 @@
 
 
 
+<div class="max-w-4xl mx-auto flex flex-col md:flex-row items-start justify-center gap-8 px-4 md:px-0 py-10">
+
+    <!-- IMAGEM SUPERMERCADO -->
+    <img class="max-w-sm w-full rounded-xl h-auto shadow"
+        src="https://images.unsplash.com/photo-1585325701962-81aebc6f6472?q=80&w=830&h=844&auto=format&fit=crop"
+        alt="Supermercado" />
+
+    <div>
+        <p class="text-green-600 text-sm font-medium">SUPERMERCADO SORRISO</p>
+        <h1 class="text-3xl font-semibold text-gray-900">Dúvidas Frequentes</h1>
+        <p class="text-sm text-slate-500 mt-2 pb-4">
+            Aqui você encontra respostas sobre entregas, pagamentos, promoções e mais.
+        </p>
+
+       
+        <div id="faqContainer"></div>
+    </div>
+</div>
+
+
+
+
+<style>
+    @keyframes marqueeScroll {
+        0% {
+            transform: translateX(0%);
+        }
+        100% {
+            transform: translateX(-50%);
+        }
+    }
+
+    .marquee-inner {
+        animation: marqueeScroll 25s linear infinite;
+    }
+
+    .marquee-reverse {
+        animation-direction: reverse;
+    }
+</style>
+
+<div class="marquee-row w-full mx-auto max-w-5xl overflow-hidden relative">
+    <div class="absolute left-0 top-0 h-full w-20 z-10 pointer-events-none bg-gradient-to-r from-white to-transparent"></div>
+    <div class="marquee-inner flex transform-gpu min-w-[200%] pt-10 pb-5" id="row1"></div>
+    <div class="absolute right-0 top-0 h-full w-20 md:w-40 z-10 pointer-events-none bg-gradient-to-l from-white to-transparent"></div>
+</div>
+
+<div class="marquee-row w-full mx-auto max-w-5xl overflow-hidden relative">
+    <div class="absolute left-0 top-0 h-full w-20 z-10 pointer-events-none bg-gradient-to-r from-white to-transparent"></div>
+    <div class="marquee-inner marquee-reverse flex transform-gpu min-w-[200%] pt-5 pb-10" id="row2"></div>
+    <div class="absolute right-0 top-0 h-full w-20 md:w-40 z-10 pointer-events-none bg-gradient-to-l from-white to-transparent"></div>
+</div>
+
+
+
+
+
+
     <footer class="px-6 pt-8 md:px-16 lg:px-36 w-full bg-gradient-to-b from-[#F5F7FF] via-[#E8EBF9] to-[#DCE1F3]">
         
     <div class="flex flex-col md:flex-row justify-between w-full gap-10 border-b border-gray-300 pb-10">
@@ -449,7 +632,7 @@
         <img 
           alt="Logo Sorriso Supermercados" 
           class="h-11" 
-          src="https://cdn-icons-png.flaticon.com/512/3081/3081559.png"
+          src="{{ asset('img/mercado.png') }}"
         >
         <p class="mt-6 text-sm text-gray-600">
           O <strong>Sorriso Supermercados</strong> é referência em qualidade e economia há mais de 20 anos, oferecendo os melhores produtos e um atendimento de excelência.
@@ -483,7 +666,7 @@
         </div>
       </div>
 
-      <!-- Links e contato -->
+     
       <div class="flex-1 flex items-start md:justify-end gap-20 md:gap-40">
         <div>
           <h2 class="font-semibold mb-5 text-gray-900">Empresa</h2>
@@ -512,14 +695,6 @@
   </footer>
 
 
-
-<link
-  rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.3/css/all.min.css"
-  integrity="sha512-yh+YHzW2LJ2K8Xv6a1NydtjT6hI5+6J6ySgFGrZ7gK+ShyzTqFqD4X/9L+I0rHZGzZg3U9qYr5x7jTvBf1X0iw=="
-  crossorigin="anonymous"
-  referrerpolicy="no-referrer"
-/>
 
 
 
