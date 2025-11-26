@@ -3,10 +3,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\DTOs\DtoFrete;
 use App\Models\ModelCep;
 use App\Models\modelInsertCepUser;
 use App\Providers\hiverSine;
 use App\Providers\ResultKmsSum;
+
 use Illuminate\Http\Request;
 
 
@@ -17,9 +19,18 @@ final class FreteController
     {
       try {
     
+        $dto = new DtoFrete(
+          $userId
+        );
+
+
+
         return response()->json([
-            'success' => ResultKmsSum::resultPriceKms($userId),
+            'success' => ResultKmsSum::resultPriceKms($dto->userId),
         ], 200);
+
+
+        
       } catch (\Throwable $th) {
         return response()->json([
             'success' => true,

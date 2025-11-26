@@ -324,6 +324,8 @@ async function showFrete(id) {
     });
 
     const result = await response.json();
+    console.log(result);
+    
     localStorage.setItem(`frete`, result.success);
     document.getElementById(`shippingValue`).innerText = result.success;
 

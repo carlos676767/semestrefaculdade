@@ -4,12 +4,14 @@
 
 
 namespace App\Providers;
+
+use App\Http\Controllers\repo\ReporFreteCalcule;
 use App\Models\ModelCep;
 
 final class ResultKmsSum
 {
     static public function resultPriceKms($userId){
-        $result =  ModelCep::getUserCep($userId);
+        $result = ReporFreteCalcule::databaseFrete($userId);
       
    
         $lng = $result[0]->longitude ?? null;
@@ -17,5 +19,7 @@ final class ResultKmsSum
 
 
      return hiverSine::getSumKms($lat, $lng);
+
+
     }
 }
