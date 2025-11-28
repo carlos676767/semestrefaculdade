@@ -193,6 +193,8 @@
 
       const values = { name, price, description };
 
+      console.log(values);
+      
       return { values, imagem };
     }
 
@@ -246,6 +248,7 @@
 
         const v = Object.values( result.erros|| result.mensagem).join(`\n`)
       
+        console.log(response);
         
         
         return Alert.alert(`error`, v)

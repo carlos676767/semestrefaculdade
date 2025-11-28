@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\DTOs\DtoProduct;
+use App\Http\Controllers\DTOs\DtoUpdateUserRole;
+use App\Http\Requests\InsertProductRequest;
 use App\Models\ModelGetItensId;
 use App\Models\ModelUpdatePedidos;
 use Illuminate\Http\Request;
@@ -9,6 +12,11 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Product;
 use App\Models\Produto;
+use App\Providers\ServiceGetCountItens;
+use App\Providers\ServiceGetProducts;
+use App\Providers\ServiceItensInsert;
+use App\Providers\ServiceUpdateItemRole;
+use ServiceGetSelectUser;
 
 final class ControllerProducts extends Controller
 {
@@ -16,7 +24,9 @@ final class ControllerProducts extends Controller
     {
         try {
 
+          
             $data = json_decode($req->input('data'), true);
+
 
 
             $validator = Validator::make(
@@ -34,7 +44,7 @@ final class ControllerProducts extends Controller
                     'image.image' => 'O arquivo enviado deve ser uma imagem.',
                 ]
             );
-
+    
             if ($validator->fails()) {
                 return response()->json([
                     'status' => 'erro',
@@ -42,16 +52,23 @@ final class ControllerProducts extends Controller
                 ], 400);
             }
 
+            
+         
+            $dto = new DtoProduct(
+                $data['name'],
+                $data['price'], 
+                $data['description'],
+             
+            );
 
-            $file = $req->file('image');
-            $path = $file->store('uploads', 'public');
 
-            $pathbs = asset('storage/' . $path);
+           
 
-            Produto::insertProduto($data['name'], $pathbs, $data['price'], $data['description']);
+            ServiceItensInsert::Products($dto->nome, $dto->price, $dto->description, $req);
+          
             return response()->json([
                 'status' => 'sucesso',
-            ], 201);
+            ], 200);
         } catch (\Throwable $th) {
             return response()->json([
                 'status' => 'erro',
@@ -63,7 +80,7 @@ final class ControllerProducts extends Controller
 
     static public function getProducts()
     {
-        return   Produto::getProdutcts();
+        return   ServiceGetProducts::getItens();
     }
 
 
@@ -73,7 +90,11 @@ final class ControllerProducts extends Controller
     {
         try {
 
-            ModelUpdatePedidos::update($id);
+            $dto = new DtoUpdateUserRole($id);
+
+            ServiceUpdateItemRole::updateItemUser($dto->id);
+        
+
             return response()->json([
                 'success' =>   'sucesso',
             ], 200);
@@ -90,15 +111,16 @@ final class ControllerProducts extends Controller
 
     static public function getProductsCount()  {
         return response()->json([
-            'success' =>   ModelGetItensId::getItensCount(),
+            'success' =>  ServiceGetCountItens::countItens() ,
         ], 200);
     }
 
 
     
     static public function getItensUser($id)  {
+        $dto = new DtoUpdateUserRole($id);
         return response()->json([
-            'success' =>   ModelGetItensId::getItemMy($id),
+            'success' =>   ServiceGetSelectUser::selectUser($dto->id),
         ], 200);
     }
 

@@ -74,10 +74,5 @@ final class ControllerPaysments extends Controller
   }
 
 
-  static public function test()  {
-    return response()->json([
-       
-      'message' => MercadoPago::pix(2,2,2),
-    ], 200);
-  }
+ 
 }
