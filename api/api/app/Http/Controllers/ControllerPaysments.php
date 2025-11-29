@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\DTOs\DtoPagamento;
 use App\Models\ModelCep;
 use App\Models\modelInsertCepUser;
 use App\Models\ModelInsertItensPay;
@@ -48,18 +49,12 @@ final class ControllerPaysments extends Controller
         'produtos' => $produtos,
         'metodo_pagamento' => $metodo_pagamento
       ] = $req->all();
-  
-      $frete = ResultKmsSum::resultPriceKms($user_id);
-      $modelSumItensDb = ModelSumItens::itensSum($produtos);
-  
-  
-      $sumFinaly = $frete + (float)  $modelSumItensDb[0]->price;
+
+    
 
 
-      $payResult = ServiceOptionPay::main($metodo_pagamento,$sumFinaly, $user_id);
-
-
-      ModelInsertItensPay::main($user_id, $produtos);
+      $dto = new DtoPagamento($user_id, $produtos, $metodo_pagamento);
+      $payResult = ServiceOptionPay::main($dto->userId, $dto->itens, $dto->metodo);
      return response()->json([
          'success' =>   $payResult,
       ], 200);

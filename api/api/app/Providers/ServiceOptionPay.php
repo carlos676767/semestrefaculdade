@@ -2,38 +2,61 @@
 
 namespace App\Providers;
 
+use App\Http\Controllers\repo\ReporInsertItensPaySucess as RepoReporInsertItensPaySucess;
+use App\Http\Controllers\repo\ReporSelectItensSumPay;
+use App\Models\ModelInsertItensPay;
+use App\Models\ModelSumItens;
 use App\Providers\StripeService;
 use App\Providers\MercadoPago;
 use Illuminate\Support\Facades\Auth;
+use ReporInsertItensPaySucess;
+
 final class ServiceOptionPay
 {
-    static public function main( string $option, $price, $idUser)
+    static public function main($userId, $produtos, $pagamento)
     {
 
 
-        $options = [
-            'pix' => function () use($price) {
-                $email = Auth::user()->email;
-              return  MercadoPago::pix($price, $email);
-            },
+        try {
 
 
-            'card' => function () use($price, $idUser) {
-               return StripeService::createPay($price, $idUser);
-            },
-
-
-        ];
-
+            $frete = ResultKmsSum::resultPriceKms($userId);
+            $modelSumItensDb = ReporSelectItensSumPay::SumItens($produtos);
 
         
+        
+            $sumFinaly = $frete + (float)  $modelSumItensDb[0]->price;
 
-        $result = $options[$option];
 
-        if ($result) {
-            return  $result();
+            $options = [
+                'pix' => function () use($sumFinaly) {
+                    $email = Auth::user()->email;
+                    return  MercadoPago::pix($sumFinaly, $email);
+                },
+
+
+                'card' => function () use ($sumFinaly, $userId) {
+                    return StripeService::createPay($sumFinaly, $userId);
+                },
+
+
+            ];
+
+
+
+
+            $result = $options[$pagamento];
+
+            if ($result) {
+                RepoReporInsertItensPaySucess::InsertItensPay($userId, $produtos);
+                return  $result();
+
+          
+            }
+
+            throw new \Exception("Erro ao criar pagamento, tente novamente.", 1);
+        } catch (\Throwable $th) {
+            throw new \Exception($th->getMessage(), 1);
         }
-
-        throw new \Exception("Erro ao criar pagamento, tente novamente.", 1);
     }
 }
