@@ -3,47 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\DTOs\DtoPagamento;
-use App\Models\ModelCep;
-use App\Models\modelInsertCepUser;
-use App\Models\ModelInsertItensPay;
-use App\Models\ModelSumItens;
-use App\Providers\hiverSine;
-use App\Providers\MercadoPago;
-use App\Providers\ResultKmsSum;
+use App\Http\Requests\StorePagamentoRequest;
 use App\Providers\ServiceOptionPay;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
-use StripeService;
+
 
 final class ControllerPaysments extends Controller
 {
-  static public function main(Request $req)
+  static public function main(StorePagamentoRequest $req)
   {
     try {
-      $validator = Validator::make($req->all(), [
-        'produtos' => 'required|array|min:1',
-        'produtos.*' => 'integer',
-      ], [
-        'produtos.required' => 'Você precisa selecionar pelo menos um produto para continuar.',
-       
-        'produtos.min' => 'Selecione pelo menos um produto antes de finalizar o pagamento.',
-        'produtos.*.integer' => 'Um ou mais produtos informados são inválidos.',
-      ]);
-  
-  
-  
-      if ($validator->fails()) {
-        return response()->json([
-       
-          'message' => 'Ops! Encontramos alguns erros antes de continuar:',
-          'errors' => $validator->errors()->all(), 
-          'hint' => 'Verifique os produtos selecionados e tente novamente.'
-        ], 422);
-  
-  
-      }
+ 
   
    
+      $req->validated();
       [
         'user_id' => $user_id,
         'produtos' => $produtos,

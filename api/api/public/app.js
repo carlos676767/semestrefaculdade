@@ -289,6 +289,8 @@ class CepConsultar {
 
         btn.innerHTML = `Consultar cep`;
         const data = await response.json();
+        console.log(data);
+        
         if (response.ok) {
             const { address, city, state } = data.cep;
             localStorage.setItem(`dados`, JSON.stringify(data.cep));
