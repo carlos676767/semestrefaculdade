@@ -11,7 +11,7 @@ class InsertAddressRequest extends FormRequest
         return true;
     }
 
-    public function rules(): array
+    public function rules(): array  
     {
         return [
             'userId'   => ['required', 'integer', 'exists:users,id'],

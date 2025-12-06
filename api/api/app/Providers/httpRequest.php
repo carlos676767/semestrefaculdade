@@ -20,4 +20,10 @@ final class HttpRequest
          throw new \Exception("erro na requsicao http", 1);
         ;
     }
+
+
+
+    static public function postRequest( string $url,array $list)  {
+        Http::post($url, $list);
+    }
 }

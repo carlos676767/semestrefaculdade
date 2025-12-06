@@ -20,4 +20,9 @@ final class PdfController
 
       return  ServicePdfGenerate::pdfGenerate($dto->id);
     }
+
+
+    static public function pdfItens(){
+        return  ServicePdfGenerate::pdfAllItens();
+    }
 }

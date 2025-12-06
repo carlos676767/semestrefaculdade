@@ -15,13 +15,13 @@ Admin (Electron): para o dono do negócio acompanhar pedidos, controlar estoque 
 
 Funcionalidades básicas:
 
-Cadastro/Login (e talvez login social).
+Cadastro/Login (e talvez login social)[x]
 
-Listagem de produtos (puxados da API Laravel).
+Listagem de produtos (puxados da API Laravel)[x]
 
-Carrinho de compras.
+Carrinho de compras[x]
 
-Endereço de entrega (cliente digita ou seleciona pelo mapa).
+Endereço de entrega (cliente digita ou seleciona pelo mapa)[x]
 
 Cálculo automático do frete (backend recebe o endereço → consulta API de mapas → devolve valor).
 
@@ -86,3 +86,9 @@ OpenStreetMap + Nominatim (grátis, mas limite baixo).
 Here API (bom equilíbrio entre custo e limite).
 
 Cdsd@355vX
+
+
+terminar a parte de rasterio site.
+respolver bug cepo nao cadstra.
+
+colocar a parte de traducao do wesite.

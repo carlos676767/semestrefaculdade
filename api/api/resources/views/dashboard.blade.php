@@ -3,8 +3,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     
-    <script src="https://unpkg.com/i18next@23.0.0/dist/umd/i18next.min.js"></script>
-<link
+    <script src="https://unpkg.com/i18next/i18next.min.js"></script>
+<script src="https://unpkg.com/i18next-i18nextify/index.min.js"></script>
+
+    <link
   rel="stylesheet"
   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.3/css/all.min.css"
   integrity="sha512-yh+YHzW2LJ2K8Xv6a1NydtjT6hI5+6J6ySgFGrZ7gK+ShyzTqFqD4X/9L+I0rHZGzZg3U9qYr5x7jTvBf1X0iw=="
@@ -12,6 +14,12 @@
   referrerpolicy="no-referrer"
 />
 
+
+
+
+
+
+<meta name="csrf-token" content="{{ csrf_token() }}">
 
     <style>
          @keyframes rotate {
@@ -100,41 +108,43 @@
 
                 <a  class="hover:text-indigo-600" href="#">
                 <div class="flex flex-col max-w-64 w-full text-sm">
+                <button id="lang-btn"
+    class="group flex items-center justify-between w-full text-left px-2 py-2 border rounded bg-white text-gray-700 border-gray-300 shadow-sm hover:bg-gray-50 focus:outline-none">
 
+    <div class="flex items-center gap-2">
+        <img id="lang-flag" class="w-6 h-6 rounded-full" src="https://flagcdn.com/w40/br.png">
+        <span id="lang-label">Português</span>
+    </div>
 
-    <button class="peer group flex items-center justify-between w-full text-left px-2 py-2 border rounded bg-white text-gray-700 border-gray-300 shadow-sm hover:bg-gray-50 focus:outline-none">
-        <div class="flex items-center gap-2">
-            <img class="w-6 h-6 rounded-full" src="https://flagcdn.com/w40/br.png" alt="flag-pt">
-            <span>Português</span>
-        </div>
+    <svg width="11" height="17" viewBox="0 0 11 17" fill="none">
+        <path d="M9.9 6L5.6 1L1.4 6" stroke="#6B7280" stroke-width="1.5" stroke-linecap="round"/>
+        <path d="M1.4 11L5.6 16L9.9 11" stroke="#6B7280" stroke-width="1.5" stroke-linecap="round"/>
+    </svg>
+</button>
 
-        <svg width="11" height="17" viewBox="0 0 11 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M9.92546 6L5.68538 1L1.44531 6" stroke="#6B7280" stroke-opacity="0.7" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M1.44564 11L5.68571 16L9.92578 11" stroke="#6B7280" stroke-opacity="0.7" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-    </button>
+<ul id="lang-menu"
+    class="hidden absolute w-64 bg-white border border-gray-300 rounded shadow-md mt-1 py-2 right-0 z-10">
 
-    <ul class="hidden overflow-hidden peer-focus:block w-64 bg-white border border-gray-300 rounded shadow-md mt-1 py-2 right-0">
+    <li onclick="setLanguage('pt','https://flagcdn.com/w40/br.png','Português')"
+        class="px-2 py-2 flex items-center gap-2 hover:bg-indigo-500 hover:text-white cursor-pointer">
+        <img class="w-6 h-6 rounded-full" src="https://flagcdn.com/w40/br.png">
+        <span>Português</span>
+    </li>
 
-        <!-- Português -->
-        <li class="px-2 py-2 flex items-center gap-2 hover:bg-indigo-500 hover:text-white cursor-pointer">
-            <img class="w-6 h-6 rounded-full" src="https://flagcdn.com/w40/br.png" alt="flag-pt">
-            <span>Português</span>
-        </li>
+    <li onclick="setLanguage('en','https://flagcdn.com/w40/us.png','English')"
+        class="px-2 py-2 flex items-center gap-2 hover:bg-indigo-500 hover:text-white cursor-pointer">
+        <img class="w-6 h-6 rounded-full" src="https://flagcdn.com/w40/us.png">
+        <span>English</span>
+    </li>
 
-        <!-- Inglês -->
-        <li class="px-2 py-2 flex items-center gap-2 hover:bg-indigo-500 hover:text-white cursor-pointer">
-            <img class="w-6 h-6 rounded-full" src="https://flagcdn.com/w40/us.png" alt="flag-en">
-            <span>English</span>
-        </li>
+    <li onclick="setLanguage('es','https://flagcdn.com/w40/es.png','Español')"
+        class="px-2 py-2 flex items-center gap-2 hover:bg-indigo-500 hover:text-white cursor-pointer">
+        <img class="w-6 h-6 rounded-full" src="https://flagcdn.com/w40/es.png">
+        <span>Español</span>
+    </li>
 
-        <!-- Espanhol -->
-        <li class="px-2 py-2 flex items-center gap-2 hover:bg-indigo-500 hover:text-white cursor-pointer">
-            <img class="w-6 h-6 rounded-full" src="https://flagcdn.com/w40/es.png" alt="flag-es">
-            <span>Español</span>
-        </li>
+</ul>
 
-    </ul>
 </div>
 
                 

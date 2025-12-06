@@ -204,7 +204,10 @@ class GetIdUser {
 
 class SendAddreas {
     static async sendAddreas() {
+       try {
         const getLocalStorage = JSON.parse(localStorage.getItem("dados"));
+       
+        
         const id = await GetIdUser.getId();
 
         getLocalStorage.userId = id.idUser;
@@ -222,7 +225,13 @@ class SendAddreas {
             body: JSON.stringify(getLocalStorage),
         });
 
+ 
+        console.log(data);
+        
         if (data.ok) {
+            const result = await data.json();
+    
+            console.log(result);
             return AlertJs.alertJs(
                 `parabens`,
                 `success`,
@@ -230,14 +239,17 @@ class SendAddreas {
             );
         }
 
-        const result = await data.json();
-        console.log(result);
-
+    
+        
         AlertJs.alertJs(
             `error ao cadastrar`,
             `error`,
             `tente novamente realizar o cadastro reiniciando a pagina.`
         );
+       } catch (error) {
+        console.log(error);
+        
+       }
     }
 }
 
@@ -289,7 +301,7 @@ class CepConsultar {
 
         btn.innerHTML = `Consultar cep`;
         const data = await response.json();
-        console.log(data);
+
         
         if (response.ok) {
             const { address, city, state } = data.cep;
@@ -326,7 +338,7 @@ async function showFrete(id) {
     });
 
     const result = await response.json();
-    console.log(result);
+
     
     localStorage.setItem(`frete`, result.success);
     document.getElementById(`shippingValue`).innerText = result.success;
@@ -430,7 +442,7 @@ class Payment {
 
             const data = await response.json();
 
-            console.log(data);
+
 
             if (!response.ok) {
                 const messages = Object.values(data).join("\n");
@@ -441,7 +453,7 @@ class Payment {
                 );
             }
 
-            console.log(data.success);
+    
 
             const redirectPage = document.createElement("a");
             redirectPage.href = data.success;
@@ -707,35 +719,8 @@ function cards() {
 
 cards();
 
-function traducao() {
-    i18next .init({
-            lng: "pt",
-            resources: {
-               
-                en: {
-                    translation: {
-                        promocoes: "Contact us via WhatsApp.",
-                        contatoWpp: "Contact us via WhatsApp.",
-                        familia: "Your family's trusted supermarket.",
-                        sub: "At Sorriso Supermarkets you'll find the best prices, quality, and variety in every department.",
-                    },
-                },
-            },
-        })
-        .then(updateContent);
-
-}
 
 
 
 
 
-
-// function updateContent() {
-//     document.getElementById("title").innerText = i18next.t("title");
-//     document.getElementById("text").innerText = i18next.t("text");
-// }
-
-// function changeLang(lang) {
-//     i18next.changeLanguage(lang).then(updateContent);
-// }

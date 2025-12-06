@@ -19,7 +19,8 @@ class modelInsertCepUser extends Model
             DB::commit();
         } catch (\Throwable $th) {
             DB::rollBack();
-            throw $th; 
+          throw new \Exception($th->getMessage(), 1);
+        
         }
     }
 

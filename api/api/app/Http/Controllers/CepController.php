@@ -10,11 +10,12 @@ use App\Models\ModelCep;
 use App\Models\modelInsertCepUser;
 use App\Providers\HttpRequest;
 use App\Providers\ServiceCepUser;
+use App\Providers\ServiceInsertAddreas;
 use Barryvdh\DomPDF\ServiceProvider;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
-use ServiceInsertAddreas;
+
 
 class CepController extends Controller
 {
@@ -80,11 +81,11 @@ class CepController extends Controller
                 $req->district
             );
     
-         ServiceInsertAddreas::serviceInsert($dto->user, $dto->cep, $dto->lat,$dto->lont, $dto->state, $dto->descrict);
+         ServiceInsertAddreas::serviceInsert($dto->user, $dto->cep, $dto->lat,$dto->lng, $dto->state, $dto->district);
 
 
             return response()->json([
-                'success' => true,
+                'success' => $dto,
                 'message' => 'Endereço validado e inserido com sucesso!',
             ]);
 

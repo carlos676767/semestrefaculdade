@@ -8,8 +8,8 @@ final class DtoInsertAddreas
         public int $user,
         public int $cep,
         public float $lat,
-        public float $lont,
+        public float $lng,
         public string $state,
-        public string $descrict
+        public string $district
     ) {}
 }

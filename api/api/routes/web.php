@@ -19,6 +19,11 @@ Route::get('/crud', function () {
 });
 
 
+Route::get('/pedidos', function () {
+    return view('pedidos');
+});
+
+
 Route::get('/404', function () {
     return view('404Page');
 });
@@ -35,7 +40,14 @@ Route::get('/frete/{userId}', [FreteController::class, 'getFrete']);
 Route::post('/pay', [ControllerPaysments::class, 'main']);
 Route::get('/test', [ControllerPaysments::class, 'test']);
 Route::get('/itens/{id}', [ControllerProducts::class, 'getItensUser']);
+Route::get('/allItens', [PdfController::class, 'pdfItens']);
 Route::get('/pdf/{id}', [PdfController::class, 'pdfGenerate']);
+Route::get('/itensAll', [ControllerProducts::class, 'getAllItens']);
+Route::put('/updateItem', [ControllerProducts::class, 'updateStatusPays']);
+
+
+
+Route::delete('/deleteItem/{id}', [ControllerProducts::class, 'deleteItem']);
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

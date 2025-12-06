@@ -53,5 +53,44 @@ WHERE pedidos.status <> 'recebido'
   $id
 ]);
   }
+
+
+
+  static public function getItensAll(){
+    return DB::select("
+   
+   
+SELECT 
+    users.name AS username,
+    enderecos.cep,
+    enderecos.rua,
+    enderecos.longitude,
+    enderecos.latitude,
+    enderecos.estado,
+    pedidos.status,
+    itens.descricao,
+    itens.nome AS itensName,
+    itens.imagem,
+    itens.id,
+    users.id AS userid
+FROM
+    enderecos
+        JOIN
+    users ON users.id = enderecos.user_id
+        JOIN
+    pedidos ON users.id = pedidos.user_id
+        JOIN
+    itens ON itens.id = pedidos.item_id
+   ", );
+  }
+
+
+  static public function getItem(){
+    return DB::select("
+   
+  
+    SELECT * FROM itens limit 1
+       ", );
+  }
 }
 

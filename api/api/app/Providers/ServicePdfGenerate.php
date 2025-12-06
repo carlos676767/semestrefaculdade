@@ -15,4 +15,13 @@ final class ServicePdfGenerate
 
         return $pdf->stream('historico.pdf');
     }
+
+
+    static public function pdfAllItens()  {
+        $itens = ServiceAllItens::allItens();
+
+        $pdf = Pdf::loadView('pdf.pdfItens', ['dados' => $itens ]);
+
+        return $pdf->stream('historico.pdf');
+    }
 }
