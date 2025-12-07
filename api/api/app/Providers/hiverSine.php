@@ -1,39 +1,34 @@
 <?php
 
 
-namespace App\Providers;
 
+
+
+namespace App\Providers;
 
 final class hiverSine 
 {
-    static private function hiverSineCords( $lat2, $lon2)  {
-    $raioTerra = 6371;
+    static private function haversineDistance($lat2, $lon2) {
+        $raioTerra = 6371; 
 
+        $lat1 = deg2rad(-12.58272);
+        $lon1 = deg2rad(-55.75365);
+        $lat2 = deg2rad($lat2);
+        $lon2 = deg2rad($lon2);
 
-    function deg($deg)  {
-        return $deg * (pi() / 180);
+        $dLat = $lat2 - $lat1;
+        $dLon = $lon2 - $lon1;
+
+        $a = pow(sin($dLat / 2), 2) + cos($lat1) * cos($lat2) * pow(sin($dLon / 2), 2);
+        $c = 2 * atan2(sqrt($a), sqrt(1 - $a));
+
+        return $raioTerra * $c;
     }
 
+    static public function getSumKms($lat, $lon) {
+        $result = self::haversineDistance($lat, $lon);
 
-    $lat1 = deg(-12.58272);
-    $lon1 = deg(-55.75365);
-    $lat2 = deg($lat2);
-    $lon2 = deg($lon2);
-
-    $dLat = $lat2 - $lat1;
-    $dLon = $lon2 - $lon1;
-
-    $a = sin($dLat / 2) ** 2 + cos($lat1) * cos($lat2) * sin($dLon / 2) ** 2;
-    $c = 2 * atan2(sqrt($a), sqrt(1 - $a));
-
-    return $raioTerra * $c;
-    }
-
-
-    static public function getSumKms($lat, $lon)  {
-       
-        $result = hiverSine::hiverSineCords($lat, $lon);
-        return floor($result /100);
-
+        return floor(round($result, 2)*3);
     }
 }
+ 

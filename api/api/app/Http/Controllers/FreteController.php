@@ -27,6 +27,7 @@ final class FreteController
 
         return response()->json([
             'success' => ResultKmsSum::resultPriceKms($dto->userId),
+            'a' => $userId,
         ], 200);
 
 

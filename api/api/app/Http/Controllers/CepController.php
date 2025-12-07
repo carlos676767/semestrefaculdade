@@ -81,13 +81,13 @@ class CepController extends Controller
                 $req->district
             );
     
-         ServiceInsertAddreas::serviceInsert($dto->user, $dto->cep, $dto->lat,$dto->lng, $dto->state, $dto->district);
+         ServiceInsertAddreas::serviceInsert($dto->user, $dto->cep,$dto->district, $dto->lng,$dto->lat,$dto->state);
 
 
             return response()->json([
-                'success' => $dto,
+                'success' => true,
                 'message' => 'Endereço validado e inserido com sucesso!',
-            ]);
+            ], 200);
 
         } catch (\Exception $e) {
             return response()->json([

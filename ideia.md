@@ -88,7 +88,7 @@ Here API (bom equilíbrio entre custo e limite).
 Cdsd@355vX
 
 
-terminar a parte de rasterio site.
+terminar a parte de rasterio site[]
 respolver bug cepo nao cadstra.
 
-colocar a parte de traducao do wesite.
+

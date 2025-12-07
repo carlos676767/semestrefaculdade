@@ -38,7 +38,7 @@ Route::get('/userExistAddreas/{id}', [CepController::class, 'getUserExistAddreas
 Route::get('/idUser', [ProfileController::class, 'getIduser']);
 Route::get('/frete/{userId}', [FreteController::class, 'getFrete']);
 Route::post('/pay', [ControllerPaysments::class, 'main']);
-Route::get('/test', [ControllerPaysments::class, 'test']);
+
 Route::get('/itens/{id}', [ControllerProducts::class, 'getItensUser']);
 Route::get('/allItens', [PdfController::class, 'pdfItens']);
 Route::get('/pdf/{id}', [PdfController::class, 'pdfGenerate']);

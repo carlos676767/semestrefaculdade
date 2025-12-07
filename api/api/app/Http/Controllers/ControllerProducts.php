@@ -20,10 +20,11 @@ use App\Providers\ServiceAllItens;
 use App\Providers\ServiceDeleteItem;
 use App\Providers\ServiceGetCountItens;
 use App\Providers\ServiceGetProducts;
+use App\Providers\ServiceGetSelectUser;
 use App\Providers\ServiceItensInsert;
 use App\Providers\ServiceUpdateItemRole;
 use App\Providers\ServiceUpdateStatusItens;
-use ServiceGetSelectUser;
+
 
 final class ControllerProducts extends Controller
 {

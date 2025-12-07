@@ -42,8 +42,9 @@ ORDER BY pedidos.user_id", [$id]);
 
   static public function getItemMy($id)  {
     return DB::select("
- SELECT 
-    CONCAT(itens.nome, ' - R$', itens.preco) AS item_formatado
+
+    SELECT 
+  *
 FROM pedidos
 JOIN itens ON itens.id = pedidos.item_id
 WHERE pedidos.status <> 'recebido'

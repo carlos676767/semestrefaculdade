@@ -16,6 +16,13 @@
 
 
 
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+/>
+<script
+  src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+</script>
 
 
 
@@ -106,46 +113,11 @@
 
 
 
-                <a  class="hover:text-indigo-600" href="#">
-                <div class="flex flex-col max-w-64 w-full text-sm">
-                <button id="lang-btn"
-    class="group flex items-center justify-between w-full text-left px-2 py-2 border rounded bg-white text-gray-700 border-gray-300 shadow-sm hover:bg-gray-50 focus:outline-none">
+            
+ 
 
-    <div class="flex items-center gap-2">
-        <img id="lang-flag" class="w-6 h-6 rounded-full" src="https://flagcdn.com/w40/br.png">
-        <span id="lang-label">Português</span>
-    </div>
 
-    <svg width="11" height="17" viewBox="0 0 11 17" fill="none">
-        <path d="M9.9 6L5.6 1L1.4 6" stroke="#6B7280" stroke-width="1.5" stroke-linecap="round"/>
-        <path d="M1.4 11L5.6 16L9.9 11" stroke="#6B7280" stroke-width="1.5" stroke-linecap="round"/>
-    </svg>
-</button>
 
-<ul id="lang-menu"
-    class="hidden absolute w-64 bg-white border border-gray-300 rounded shadow-md mt-1 py-2 right-0 z-10">
-
-    <li onclick="setLanguage('pt','https://flagcdn.com/w40/br.png','Português')"
-        class="px-2 py-2 flex items-center gap-2 hover:bg-indigo-500 hover:text-white cursor-pointer">
-        <img class="w-6 h-6 rounded-full" src="https://flagcdn.com/w40/br.png">
-        <span>Português</span>
-    </li>
-
-    <li onclick="setLanguage('en','https://flagcdn.com/w40/us.png','English')"
-        class="px-2 py-2 flex items-center gap-2 hover:bg-indigo-500 hover:text-white cursor-pointer">
-        <img class="w-6 h-6 rounded-full" src="https://flagcdn.com/w40/us.png">
-        <span>English</span>
-    </li>
-
-    <li onclick="setLanguage('es','https://flagcdn.com/w40/es.png','Español')"
-        class="px-2 py-2 flex items-center gap-2 hover:bg-indigo-500 hover:text-white cursor-pointer">
-        <img class="w-6 h-6 rounded-full" src="https://flagcdn.com/w40/es.png">
-        <span>Español</span>
-    </li>
-
-</ul>
-
-</div>
 
                 
                 </a>
@@ -332,6 +304,89 @@
     </section>
 
 
+
+<div id="modalPedidoOverlay"
+  class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden justify-center items-center z-50">
+
+  <div
+    id="modalPedido"
+    class="glass rounded-2xl p-6 shadow-2xl border border-white/20 w-full max-w-5xl max-h-[90vh] overflow-y-auto animate-fadeIn">
+
+  
+    <div class="flex items-center justify-between mb-6">
+      <h2 class="text-2xl font-bold text-gray-800 flex items-center gap-2">
+        <i data-lucide="file-text"></i>
+        Detalhes do Pedido
+      </h2>
+
+      <button 
+        class="text-gray-600 hover:text-red-600 transition">
+        <i data-lucide="x" class="w-7 h-7"></i>
+      </button>
+    </div>
+
+
+    <div class="flex items-center gap-3 mb-6">
+     
+
+
+
+      <button id="closerMneu"  class="flex items-center gap-2.5 border border-gray-500/30 px-4 py-2 text-sm text-gray-800 rounded bg-white hover:text-pink-500/70 hover:bg-pink-500/10 hover:border-pink-500/30 active:scale-95 transition">
+        <svg width="16" height="13" viewBox="0 0 16 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M15 6.5H1M6.5 12 1 6.5 6.5 1" stroke="#FDA4AF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Fechar modal
+
+      
+    </div>
+
+   
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+     
+      <div class="bg-white rounded-xl p-5 shadow border">
+      
+        <h3 class="font-semibold text-gray-800 text-lg mt-4 mb-2 flex items-center gap-2">
+          <i data-lucide="map-pin"></i> Endereço
+        </h3>
+        <p id="dpEndereco" class="text-gray-700">---</p>
+
+      
+        <p id="dpPagamento" class="text-gray-700">---</p>
+
+        <h3 class="font-semibold text-gray-800 text-lg mt-4 mb-2 flex items-center gap-2">
+          <i data-lucide="badge-check"></i> Status
+        </h3>
+
+        <select id="dpStatus" class="mt-1 p-2 border rounded-lg w-full bg-gray-50">
+          <option id="statusItem">Recebido</option>
+  
+        </select>
+      </div>
+
+    
+      <div class="bg-white rounded-xl p-5 shadow border">
+        <h3 class="font-semibold text-gray-800 text-lg mb-3 flex items-center gap-2">
+          <i data-lucide="map"></i> Localização
+        </h3>
+        <div id="map" class="w-full h-64 rounded-lg border"></div>
+      </div>
+
+    </div>
+
+
+    <div class="mt-6 bg-white rounded-xl p-5 shadow border">
+      <h3 class="font-semibold text-gray-800 text-lg mb-3 flex items-center gap-2">
+        <i data-lucide="shopping-cart"></i> Itens do Pedido
+      </h3>
+
+      <ul id="dpItens" class="text-gray-700 space-y-2"></ul>
+    </div>
+
+  </div>
+</div>
+
+
     <div class="flex flex-col md:flex-row items-center gap-10">
  
 
@@ -439,7 +494,7 @@
             </div>
            
 
-            <!-- Botão Checkout -->
+           
             <div class="mt-6">
               <button id="checkoutBtn" class="flex items-center justify-center w-full rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-xs hover:bg-indigo-700">
                 Finalizar Compra
@@ -468,46 +523,90 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@tailwindplus/elements@1" type="module"></script>
 
-  <el-popover id="desktop-menu-solutions" anchor="bottom" popover class="w-screen max-w-max overflow-visible bg-transparent px-4 transition transition-discrete [--anchor-gap:--spacing(5)] backdrop:bg-transparent open:flex data-closed:translate-y-1 data-closed:opacity-0 data-enter:duration-200 data-enter:ease-out data-leave:duration-150 data-leave:ease-in">
-    <div class="w-screen max-w-md flex-auto overflow-hidden rounded-3xl bg-gray-800 text-sm/6 outline-1 -outline-offset-1 outline-white/10">
+<el-popover 
+    id="desktop-menu-solutions" 
+    anchor="bottom" 
+    popover
+    class="w-screen max-w-max overflow-visible bg-transparent px-4
+           transition transition-discrete [--anchor-gap:--spacing(5)]
+           backdrop:bg-transparent open:flex 
+           data-closed:translate-y-1 data-closed:opacity-0 
+           data-enter:duration-200 data-enter:ease-out 
+           data-leave:duration-150 data-leave:ease-in">
 
+    <div id="itenset" 
+         class="w-screen max-w-3xl flex-auto overflow-hidden rounded-3xl bg-gray-800 
+                text-sm/6 outline-1 -outline-offset-1 outline-white/10 p-6">
 
+        <!-- HEADER FLEX -->
+        <div class="flex items-center justify-between mb-6">
 
-    
-    
+            <!-- PDF ICON -->
+            <button id="pdf"
+                    class="flex size-12 items-center justify-center rounded-xl 
+                           bg-gray-700/50 hover:bg-gray-700 transition">
 
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="1.5" class="size-7 text-gray-300 hover:text-white">
+                    <path stroke-linecap="round" stroke-linejoin="round" 
+                        d="M6 2.25h8.25L21 9v12a.75.75 0 
+                        01-.75.75H6a.75.75 0 01-.75-.75V3A.75.75 0 
+                        016 2.25z"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" 
+                        d="M14.25 2.25V9H21"/>
+                    <text x="7" y="17" font-size="6" fill="currentColor" font-weight="bold">PDF</text>
+                </svg>
+            </button>
 
-      
-    
-    
-   
-    
-    
-        <div class="group relative flex gap-x-6 rounded-lg p-4 hover:bg-white/5">
-        <div id="pdf" class="mt-1 flex size-11 flex-none items-center justify-center rounded-lg bg-gray-700/50 group-hover:bg-gray-700">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
-         aria-hidden="true" class="size-6 text-gray-400 group-hover:text-white">
-        <path stroke-linecap="round" stroke-linejoin="round"
-              d="M6 2.25h8.25L21 9v12a.75.75 0 01-.75.75H6a.75.75 0 01-.75-.75V3A.75.75 0 016 2.25z" />
-        <path stroke-linecap="round" stroke-linejoin="round"
-              d="M14.25 2.25V9H21" />
-        <text x="7" y="17" font-size="6" fill="currentColor" font-weight="bold">PDF</text>
-    </svg>
-</div>
+            <h2 class="text-xl font-semibold text-white text-center flex-1">
+                Produtos comprados
+            </h2>
 
-          <div>
-            <a id="itens" class="font-semibold text-white">
-           
-              
-            </a>
-           
-          </div>
+            <!-- HISTÓRICO ICON -->
+            <button id="history-right"
+                    class="flex items-center justify-center size-12 rounded-xl
+                           bg-gray-700/50 hover:bg-gray-700 transition">
+
+                <svg width="20" height="22" viewBox="0 0 18 20" fill="none">
+                    <path d="M8.798 1H4.12c-1.092 0-1.638 0-2.055.212a1.95 1.95 0 
+                             00-.852.852C1 2.481 1 3.027 1 4.12v11.308c0 1.091 0 
+                             1.637.212 2.054.187.367.486.665.852.852.417.213.963.213 
+                             2.055.213h1.755M8.798 1l5.849 5.849M8.798 1v4.289c0 
+                             .546 0 .819.106 1.027a1 1 0 00.426.426c.209.107.482.107 
+                             1.028.107h4.289m0 0v.974M9.773 18.546l1.974-.395c.172-.034.258-.052.338-.083a1 
+                             1 0 00.202-.108c.07-.05.133-.111.257-.236l4.052-4.052a1.378 
+                             1.378 0 10-1.95-1.95l-4.052 4.053c-.124.124-.186.186-.235.257a1 
+                             1 0 00-.108.201c-.032.08-.049.167-.083.339z" 
+                          stroke="#FACC14" stroke-width="1.5" 
+                          stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
         </div>
-    
-    
-    </div>
-  </el-popover>
-</div>
+
+       
+        <div  class="bg-white border border-gray-300 rounded-lg overflow-hidden">
+
+            <table class="w-full table-auto">
+                <thead class="text-left text-sm text-gray-900 bg-gray-100">
+                    <tr>
+                        <th class="px-4 py-3 font-semibold">Produto</th>
+                        <th class="px-4 py-3 font-semibold">Valor</th>
+                        <th class="px-4 py-3 font-semibold">ver mais</th>
+                    </tr>
+                </thead>
+
+                <tbody id="product-body" class="text-sm text-gray-600">
+                    <!-- JS insere aqui -->
+                </tbody>
+            </table>
+        </div>
+    </div >
+
+</el-popover>
+
+
+
+
 
 <div class="relative w-full max-w-lg bg-gray-900 rounded-xl shadow-2xl overflow-hidden mx-auto my-10">
     <div id="paymentNotification" class="fixed top-5 right-5 z-50 max-w-sm w-full bg-green-50/90 backdrop-blur-md border border-green-200 rounded-xl shadow-lg p-4 transform translate-x-full transition-transform duration-500 ease-in-out">
@@ -577,7 +676,7 @@
 
 <div class="max-w-4xl mx-auto flex flex-col md:flex-row items-start justify-center gap-8 px-4 md:px-0 py-10">
 
-    <!-- IMAGEM SUPERMERCADO -->
+   
     <img class="max-w-sm w-full rounded-xl h-auto shadow"
         src="https://images.unsplash.com/photo-1585325701962-81aebc6f6472?q=80&w=830&h=844&auto=format&fit=crop"
         alt="Supermercado" />

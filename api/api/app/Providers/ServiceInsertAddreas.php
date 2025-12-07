@@ -4,9 +4,9 @@ use App\Http\Controllers\repo\ReporInsertAddreas;
 
 final class ServiceInsertAddreas
 {
-    static public function serviceInsert($userId, $cep, $district, $lat, $lng, $state) {
+    static public function serviceInsert($user, $cep, $district, $lng, $lat, $state) {
      try {
-        ReporInsertAddreas::insert($userId, $cep, $lat, $lng, $state, $district);
+        ReporInsertAddreas::insert($user, $cep, $district, $lng, $lat, $state);
      } catch (\Throwable $th) {
       throw new \Exception($th->getMessage(), 1);
      }

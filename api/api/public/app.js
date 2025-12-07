@@ -37,6 +37,8 @@ class DarkMode {
     }
 }
 
+
+
 DarkMode.darkMode();
 
 class LoadItens {
@@ -198,58 +200,55 @@ class GetIdUser {
     static async getId() {
         const data = await fetch(`http://localhost:8000/idUser`);
 
+      
+        
         return await data.json();
     }
 }
 
 class SendAddreas {
     static async sendAddreas() {
-       try {
-        const getLocalStorage = JSON.parse(localStorage.getItem("dados"));
-       
-        
-        const id = await GetIdUser.getId();
+        try {
+            const getLocalStorage = JSON.parse(localStorage.getItem("dados"));
+            console.log(getLocalStorage);
 
-        getLocalStorage.userId = id.idUser;
+            const id = await GetIdUser.getId();
 
-        const csrfToken = document
-            .querySelector('meta[name="csrf-token"]')
-            .getAttribute("content");
+            getLocalStorage.userId = id.idUser;
 
-        const data = await fetch("http://localhost:8000/addreas", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "X-CSRF-TOKEN": csrfToken,
-            },
-            body: JSON.stringify(getLocalStorage),
-        });
+            const csrfToken = document
+                .querySelector('meta[name="csrf-token"]')
+                .getAttribute("content");
 
- 
-        console.log(data);
-        
-        if (data.ok) {
+            const data = await fetch("http://localhost:8000/addreas", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRF-TOKEN": csrfToken,
+                },
+                body: JSON.stringify(getLocalStorage),
+            });
+
             const result = await data.json();
-    
-            console.log(result);
-            return AlertJs.alertJs(
-                `parabens`,
-                `success`,
-                `o seu endereco foi cadastrado com sucesso.`
-            );
-        }
+            if (data.ok) {
+                console.log(result);
+                return AlertJs.alertJs(
+                    `parabens`,
+                    `success`,
+                    `o seu endereco foi cadastrado com sucesso.`
+                );
+            }
 
-    
-        
-        AlertJs.alertJs(
-            `error ao cadastrar`,
-            `error`,
-            `tente novamente realizar o cadastro reiniciando a pagina.`
-        );
-       } catch (error) {
-        console.log(error);
-        
-       }
+            console.log(result);
+
+            AlertJs.alertJs(
+                `error ao cadastrar`,
+                `error`,
+                `tente novamente realizar o cadastro reiniciando a pagina.`
+            );
+        } catch (error) {
+            console.log(error);
+        }
     }
 }
 
@@ -302,7 +301,6 @@ class CepConsultar {
         btn.innerHTML = `Consultar cep`;
         const data = await response.json();
 
-        
         if (response.ok) {
             const { address, city, state } = data.cep;
             localStorage.setItem(`dados`, JSON.stringify(data.cep));
@@ -325,11 +323,13 @@ class CepConsultar {
 }
 
 async function showFrete(id) {
+   
+
     const token = document
         .querySelector('meta[name="csrf-token"]')
         .getAttribute("content");
 
-    const response = await fetch(`http://localhost:8000/frete/${id}`, {
+    const response = await fetch(`http://localhost:8000/frete/${Number(id)}`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
@@ -339,7 +339,8 @@ async function showFrete(id) {
 
     const result = await response.json();
 
-    
+    console.log(result);
+
     localStorage.setItem(`frete`, result.success);
     document.getElementById(`shippingValue`).innerText = result.success;
 
@@ -415,7 +416,7 @@ function notification() {
 }
 class Payment {
     static async paymant() {
-        const select = document.querySelector(`select`).value;
+        const select = document.getElementById(`payment`).value;
         const items = cart.querySelectorAll("li[data-id]");
         const ids = Array.from(items).map((item) => Number(item.dataset.id));
         const idUser = localStorage.getItem(`userId`);
@@ -442,8 +443,6 @@ class Payment {
 
             const data = await response.json();
 
-
-
             if (!response.ok) {
                 const messages = Object.values(data).join("\n");
                 return AlertJs.alertJs(
@@ -452,8 +451,6 @@ class Payment {
                     messages
                 );
             }
-
-    
 
             const redirectPage = document.createElement("a");
             redirectPage.href = data.success;
@@ -493,13 +490,82 @@ async function showItensPay() {
     const idUser = localStorage.getItem(`userId`);
     const data = await fetch(`http://localhost:8000/itens/${idUser}`);
     const response = await data.json();
+    console.log(response);
 
-    document.getElementById(`itens`).innerHTML = response.success
-        .map((c) => c.item_formatado)
-        .join(`\n`);
+    response.success.forEach((p) => {
+        const { nome, imagem, preco, status } = p;
+
+        const tbody = document.getElementById("product-body");
+        const row = document.createElement("tr");
+        row.className = "border-t border-gray-300";
+
+        row.innerHTML = `
+        <td class="px-4 py-3 flex items-center space-x-3">
+            <div class="border border-gray-300 rounded overflow-hidden">
+                <img src="${imagem}" class="w-16">
+            </div>
+            <span class="truncate max-sm:hidden">${nome}</span>
+        </td>
+
+        <td class="px-4 py-3">R$${preco}</td>
+
+      
+
+        <td class="px-4 py-3">
+       
+
+
+        <button onclick='showItensMap("${status}")'
+ class="flex items-center gap-2.5 border border-gray-500/30 px-4 py-2 text-sm text-gray-800 rounded bg-white hover:text-red-500 hover:bg-red-500/10 hover:border-red-500/30 active:scale-95 transition">
+        <svg width="19" height="17" viewBox="0 0 19 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9.083.379a.5.5 0 0 1 .945 0l1.782 5.193a.5.5 0 0 0 .473.338h5.703a.5.5 0 0 1 .284.912l-4.567 3.143a.5.5 0 0 0-.19.574l1.755 5.118a.5.5 0 0 1-.756.574l-4.673-3.216a.5.5 0 0 0-.567 0L4.6 16.23a.5.5 0 0 1-.756-.574l1.755-5.118a.5.5 0 0 0-.19-.574L.841 6.822a.5.5 0 0 1 .284-.912h5.704a.5.5 0 0 0 .473-.338z" fill="#FF532E"/>
+        </svg>
+        Reviews
+    </button>
+        </td>
+    `;
+
+        tbody.appendChild(row);
+    });
 }
 
 showItensPay();
+
+
+ async function showItensMap(stsItem) {
+    MrnUitens.menu("hidden")
+
+    const adreas = JSON.parse( localStorage.getItem(`dados`))
+    console.log(adreas);
+    
+    const {address_name, city, state, lat, lng, district} = adreas
+
+  
+    
+
+    const dpEndereco = document.getElementById(`dpEndereco`)
+
+
+    console.log(address_name);
+    
+    const itemSts = document.getElementById(`statusItem`)
+    itemSts.innerHTML = stsItem
+    dpEndereco.innerHTML = `
+    <strong>${address_name}</strong><br>
+    ${district}<br>
+    ${city} - ${state}
+`;
+
+
+
+    const mapa = L.map("map").setView([lat, lng], 15);
+
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        maxZoom: 18,
+    }).addTo(mapa);
+
+    L.marker([lat, lng]).addTo(mapa);
+}
 
 function getPdf() {
     const pdfBtn = document.getElementById(`pdf`);
@@ -719,8 +785,41 @@ function cards() {
 
 cards();
 
+class MrnUitens {
+    static menu(status) {
+        const item = document.getElementById(`modalPedidoOverlay`);
 
+        const itenset = document.getElementById(`itenset`);
 
+        if (status === `hidden`) {
+            item.classList.remove(`hidden`);
+            item.classList.add(`block`);
 
+            itenset.classList.remove(`block`);
+            itenset.classList.add(`hidden`);
+        } else if (status === `block`) {
+            item.classList.remove(`block`);
 
+            item.classList.add(`hidden`);
 
+            itenset.classList.add(`block`);
+            itenset.classList.remove(`hidden`);
+        }
+    }
+
+    static menuActions() {
+        const historyright = document.getElementById(`history-right`);
+
+        historyright.addEventListener(`click`, () => {
+            MrnUitens.menu(`hidden`);
+        });
+
+        const closerMneu = document.getElementById(`closerMneu`);
+
+        closerMneu.addEventListener(`click`, () => {
+            MrnUitens.menu(`block`);
+        });
+    }
+}
+
+MrnUitens.menuActions();

@@ -147,9 +147,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.26.4/dist/sweetalert2.min.css
         </h3>
         <p id="dpNome" class="text-gray-700">---</p>
 
-        <h3 class="font-semibold text-gray-800 text-lg mt-4 mb-2 flex items-center gap-2">
-          <i data-lucide="map-pin"></i> Endereço
-        </h3>
+     
         <p id="dpEndereco" class="text-gray-700">---</p>
 
         <h3 class="font-semibold text-gray-800 text-lg mt-4 mb-2 flex items-center gap-2">
