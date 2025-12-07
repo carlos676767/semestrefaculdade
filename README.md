@@ -1,4 +1,5 @@
 
+
 # 🛒 Sistema de Compras com Pagamentos, CRUD e Painel Administrativo
 
 ![Laravel](https://img.shields.io/badge/Laravel-11.x-red?logo=laravel&logoColor=white)
@@ -15,63 +16,63 @@ Projeto completo desenvolvido com Laravel, Node.js e MySQL, incluindo fluxo de c
 
 ---
 
-## 🚀 Funcionalidades Principais
+# 🚀 Funcionalidades Principais
 
-### *Página Inicial (Home)*
+## 🖥 *Frontend*
+### Página Inicial (Home)
 - Tela de *histórico* com todas as compras do usuário.
 - *Carrinho de compras* com seleção de método de pagamento e finalização do pedido.
-- *Dark Mode* em toda a aplicação.
-- *Botão de WhatsApp* para contato direto.
-- *Página do usuário* com edição completa de informações.
-- *Página de item*: ao selecionar um produto, o usuário é redirecionado ao carrinho.
-- *Tela de Login e Registro* totalmente funcional.
-- Histórico de compras integrado ao perfil do usuário.
+- *Dark Mode* ativado em toda a interface.
+- *Botão do WhatsApp* para contato direto.
+- *Página do Usuário* com edição de informações pessoais.
+- *Página do Item*, levando o usuário ao carrinho após selecionar.
+- *Tela de Login e Registro* estilizada e funcional.
+- Histórico de compras integrado ao perfil.
+
+### Landing Page de FAQ
+- Página dedicada com perguntas e respostas.
+
+### Footer
+- Informações gerais
+- Links úteis
+- Contatos
 
 ---
 
-## ❓ Landing Page de FAQ
-Página dedicada com *perguntas e respostas* para esclarecer dúvidas frequentes dos usuários.
+## 🛠 *Backend / Painel Administrativo (CRUD)*
 
----
-
-## 📌 Footer
-Contém:
-- Informações gerais da plataforma  
-- Links úteis  
-- Dados de contato  
-
----
-
-# 🛠 Painel Administrativo (CRUD)
-
-### Funcionalidades do Admin:
-- Cadastro e gerenciamento completo de itens/produtos.
-- Tela exclusiva exibindo todos os produtos cadastrados.
-- Seção de *pedidos*, permitindo:
-  - Ver todos os pedidos realizados.
-  - Ver informações dos usuários associados a cada pedido.
-  - *Alterar o status* do pedido (entregue / não entregue).
-- Histórico de compras de *todos os usuários* disponível no painel administrativo.
+### Funcionalidades do Admin
+- Cadastro e gerenciamento de itens/produtos.
+- Tela com listagem completa dos itens cadastrados.
+- Área de *Pedidos*, permitindo:
+  - Visualizar todos os pedidos realizados.
+  - Acessar informações completas dos usuários.
+  - *Alterar status do pedido* (entregue / pendente).
+- Histórico de compras de *todos os usuários* acessível ao admin.
 
 ---
 
 # 🧩 Tecnologias Utilizadas
 
-### *Backend*
-- Laravel *11.x*
-- PHP *8.8*
-- Node.js *22.14*
-- MySQL (versão atual)
+## ⚙ Backend
+- *Laravel 11.x*
+- *PHP 8.8*
+- *Node.js 22.14*
+- *MySQL (versão atual)*
+
+## 🎨 Frontend
+- *Tailwind CSS*
+- *Blade Templates*
+- *Axios.js*
 
 ---
 
 # 📚 Bibliotecas e Ferramentas
 
-- *Stripe*
-- *Mercado Pago*
-- *Socket.IO*
-- *Laravel Breeze*
-- *Tailwind CSS*
+- *Stripe (pagamentos)*
+- *Mercado Pago (pagamentos)*
+- *Socket.IO (comunicação em tempo real)*
+- *Laravel Breeze (auth)*
 - *Express.js*
 - *Axios.js*
 
@@ -79,14 +80,16 @@ Contém:
 
 # 🏗 Arquitetura e Padrões
 
-- *MVC*
+- *MVC (Model-View-Controller)*
 - *Princípios SOLID*
 - *DTO (Data Transfer Object)*
 - *Repository Pattern*
 
 ---
 
-## 📦 Instalação
+# 📦 Instalação
+
+## Backend (Laravel)
 
 ```bash
 composer install
@@ -113,3 +116,5 @@ Este projeto é livre para ser utilizado como estudo e portfólio.
 ✨ Autor
 
 Desenvolvido por cs
+
+---
